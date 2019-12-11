@@ -1,6 +1,10 @@
 import React from 'react';
-import firebase from './utils/firebaseUtils';
+import Header from '../../components/Header/index.js'; 
+import Info from '../../components/Info/index.js' 
+
+import firebase from '../../utils/firebaseUtils';
 import './styles.css';
+
 
 
 firebase.firestore().collection("foodsBreakfast").add({
@@ -101,12 +105,15 @@ firebase.firestore().collection('extras').add({
 });
   
 
-function App() {
+function Order() {
   return (
     <div className="App">
+      <Header/>
+      <Info/>
       <h1>Aqui vai rolar o APP</h1>
+      
     </div>
   );
 }
 
-export default App;
+export default Order;

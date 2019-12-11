@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Order from './pages/order.js/Order';
+import './styles.css'
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Order/>, document.getElementById('root'));
 
 
