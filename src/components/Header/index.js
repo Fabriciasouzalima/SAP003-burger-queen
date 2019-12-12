@@ -4,9 +4,11 @@ import './styles.css';
 
 const Header = () => (
     <header id="main-header"> 
-    BURGER QUEEN
+     BURGER QUEEN
     </header>
 
 );
 
 export default Header; 
+
+//<img src=""/>

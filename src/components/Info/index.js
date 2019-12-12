@@ -18,7 +18,8 @@ const AddClientInfo = () => {
                 table,
             })
             .then(()=>{
-                console.log(setClient(''),setTable(''));
+               setTable('')
+               setClient('')
                  
                 
             })
@@ -31,13 +32,13 @@ const AddClientInfo = () => {
       <label>
         <strong>NOME DO CLIENTE</strong>
       </label>
-      <input type="text" value={client} onChange={e => setClient(e.currentTarget.value)}/>
+      <input id='input-name'type="text" value={client} onChange={e => setClient(e.currentTarget.value)}/>
       <label>
         <strong>NÚMERO DA MESA</strong>
       </label>
-      <input type="number" value={table} onChange={e => setTable(e.currentTarget.value)}/>
-      <button onSubmit={onSubmit}><strong>CAFÉ</strong></button>
-      <button onSubmit={onSubmit}><strong>ALMOÇO/JANTAR</strong></button>
+      <input id='input-number'type="number" value={table} onChange={e => setTable(e.currentTarget.value)}/>
+      <button id='btn-food' onClick={onSubmit}><strong>CAFÉ</strong></button>
+      <button id='btn-food' onClick={onSubmit}><strong>ALMOÇO/JANTAR</strong></button>
     </div>
    
   );
