@@ -32,6 +32,7 @@ const AddClientInfo = () => {
     }
   
   return (
+
     <div>
       <label>
         <strong>NOME DO CLIENTE</strong>
@@ -54,7 +55,7 @@ function MenuCoffee(){
 useEffect(() => {
   const unsubscribe = firebase
     .firestore()
-    .collection('foodsBreakfast')
+    .collection('menu')
     .onSnapshot((snapshot) => {
       const products = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -69,6 +70,7 @@ useEffect(() => {
 
 
 
+
 function Order() {
 
   const itens = MenuCoffee()
@@ -76,25 +78,22 @@ function Order() {
     <div className="App">
       <Header/>
       <AddClientInfo/>
-      <h1>Café</h1>
-      <ol>
+      <h1>Menu</h1>
+      <div>
+        <h1>Café da Manha</h1>
         {itens.map((itens) => 
-          <div key={itens.id}>
-            <div className='itens-entry'> 
-              {itens.name}
-              <code className='itens'>{itens.price}reais</code>
-            </div>
-          </div>
+             { return (itens.breakfast)? <p className='itens'>{itens.name} {itens.price}reais</p> : false}
         )}
-      </ol>
-      <h1>Hambúrguer</h1>
-      <p></p>
-      <h1>Acompanhamentos</h1>
-      <p></p>
-      <h1>Bebidas</h1>
-      <p></p>
-      <h1>Extras</h1>
-      <p></p>     
+        
+      </div>
+      <div>
+        <h1>Almoço</h1>
+        {itens.map((itens) => 
+             { return (itens.lunch)? <p className='itens'>{itens.name} {itens.price}reais</p> : false}
+        )}
+        
+      </div>
+      
     </div>
   );
 }
