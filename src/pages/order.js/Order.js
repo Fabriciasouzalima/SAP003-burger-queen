@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Header from '../../components/Header/index.js'; 
+import CounterProduct from '../../components/addClient/addClient.js'
 
 import firebase from '../../utils/firebaseUtils';
 import './styles.css';
@@ -42,7 +43,7 @@ const AddClientInfo = () => {
         <strong>NÚMERO DA MESA</strong>
       </label>
       <input id='input-number'type="number" value={table} onChange={e => setTable(e.currentTarget.value)}/>
-      <button id='btn-food' onClick={onSubmit}><strong>Enviar Pedidos</strong></button>
+      <button id='btn-send' onClick={onSubmit}><strong>Enviar Pedidos</strong></button>
     </div>
    
   );
@@ -93,7 +94,8 @@ function Order() {
         )}
         
       </div>
-      
+      <CounterProduct/>      
+    
     </div>
   );
 }
