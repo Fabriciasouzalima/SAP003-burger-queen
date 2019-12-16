@@ -1,15 +1,19 @@
 import React, {useState, useEffect} from 'react';
-import Header from '../../components/Header/index.js'; 
-import CounterProduct from '../../components/addClient/addClient.js'
+import Header from '../../components/Header/index.js';
+import Button from '../../components/Button/button.js';
+//import input from '../../components/Input/input.js'
 
 import firebase from '../../utils/firebaseUtils';
 import './styles.css';
 
+
 const AddClientInfo = () => {
     const [client, setClient] = useState('');
     const [table, setTable] = useState('');
-    const [pedidos, setPedidos] = useState('');
+    const [pedidos, setPedidos] = useState([]);
     const [total, setTotal] = useState('');
+    const [date, setDate] = useState('');
+    const [hour,setHour] = useState('')
 
     function onSubmit(e) {
         e.preventDefault()
@@ -22,82 +26,135 @@ const AddClientInfo = () => {
                 table,
                 pedidos,
                 total,
+                date,
+                hour,
             })
             .then(()=>{
                setTable('')
                setClient('')
                setPedidos('')
                setTotal('')
+               setDate('')
+               setHour('')
                 
             }) 
     }
   
   return (
-
     <div>
       <label>
         <strong>NOME DO CLIENTE</strong>
       </label>
-      <input id='input-name'type="text" value={client} onChange={e => setClient(e.currentTarget.value)}/>
+      <input
+        className="input-name"
+        type="text"
+        value={client}
+        onChange={e => setClient(e.currentTarget.value)}
+      />
       <label>
         <strong>NÚMERO DA MESA</strong>
       </label>
-      <input id='input-number'type="number" value={table} onChange={e => setTable(e.currentTarget.value)}/>
-      <button id='btn-send' onClick={onSubmit}><strong>Enviar Pedidos</strong></button>
+      <input
+        className="input-number"
+        type="number"
+        value={table}
+        onChange={e => setTable(e.currentTarget.value)}
+      />
+      <Button class="itens" handleClick={onSubmit} title="Enviar Pedidos" />
     </div>
-   
   );
 };
 
-function MenuCoffee(){
+function AllMenu(){
 
-  const [itens, setItens] = useState([])
+  const [existingProducts, setExistingProducts] = useState([])
 
 useEffect(() => {
   const unsubscribe = firebase
     .firestore()
     .collection('menu')
     .onSnapshot((snapshot) => {
-      const products = snapshot.docs.map((doc) => ({
+      const dbExistingProducts = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data()
       }))
-      setItens(products)
+      setExistingProducts(dbExistingProducts)
     })
     return () => unsubscribe()
 }, [])
- return itens
+ return existingProducts
 }
-
 
 
 
 function Order() {
+  
 
-  const itens = MenuCoffee()
+  const existingProducts = AllMenu()
+  const [orderProducts, setOrderProducts] = useState([])
+
+  const addProduct = (product) => {
+    const itemIndex = orderProducts.findIndex(i => i.product.name === product.name);
+    console.log(itemIndex);
+
+    if (itemIndex === -1) {
+      const orderItem = { quantity: 1, product: product }
+      setOrderProducts(current => [...current, orderItem]);
+    } else {
+      const selectedProduct = orderProducts[itemIndex]
+      selectedProduct.quantity = selectedProduct.quantity+1
+      console.log(orderProducts);
+      setOrderProducts([...orderProducts]);
+    }
+  };
+
+
   return (
     <div className="App">
-      <Header/>
-      <AddClientInfo/>
+      <Header />
+      <AddClientInfo />
+      <div className="print-order">
+        {orderProducts.map(orderProduct => (
+          <p>
+            nome: {orderProduct.product.name} quantidade:{" "}
+            {orderProduct.quantity} preco: {orderProduct.product.price} total:{" "}
+            {orderProduct.quantity * orderProduct.product.price}
+          </p>
+        ))}
+      </div>
       <h1>Menu</h1>
       <div>
         <h1>Café da Manha</h1>
-        {itens.map((itens) => 
-             { return (itens.breakfast)? <p className='itens'>{itens.name} {itens.price}reais</p> : false}
-        )}
-        
+        {existingProducts.map((product, i) => {
+          return product.breakfast ? (
+            <Button
+              key={i}
+              handleClick={() => addProduct(product)}
+              class="itens"
+              title={`${product.name} ${product.price} reais`}
+            />
+          ) : (
+            false
+          );
+        })}
       </div>
       <div>
         <h1>Almoço</h1>
-        {itens.map((itens) => 
-             { return (itens.lunch)? <p className='itens'>{itens.name} {itens.price}reais</p> : false}
-        )}
-        
+        {existingProducts.map((product, i) => {
+          return product.lunch ? (
+            <Button
+              key={i}
+              handleClick={() => addProduct(product)}
+              class="itens"
+              title={`${product.name} ${product.price} reais`}
+            />
+          ) : (
+            false
+          );
+        })}
       </div>
-      <CounterProduct/>      
-    
     </div>
   );
 }
 
-export default Order
+export default Order 
