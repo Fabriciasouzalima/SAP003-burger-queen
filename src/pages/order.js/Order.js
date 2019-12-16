@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Header from '../../components/Header/index.js';
 import Button from '../../components/Button/button.js';
-//import input from '../../components/Input/input.js'
+import Input from '../../components/Input/input.js'
 
 import firebase from '../../utils/firebaseUtils';
 import './styles.css';
@@ -45,8 +45,8 @@ const AddClientInfo = () => {
       <label>
         <strong>NOME DO CLIENTE</strong>
       </label>
-      <input
-        className="input-name"
+      <Input
+        class="input-name"
         type="text"
         value={client}
         onChange={e => setClient(e.currentTarget.value)}
@@ -54,8 +54,8 @@ const AddClientInfo = () => {
       <label>
         <strong>NÚMERO DA MESA</strong>
       </label>
-      <input
-        className="input-number"
+      <Input
+        class="input-number"
         type="number"
         value={table}
         onChange={e => setTable(e.currentTarget.value)}
@@ -108,6 +108,20 @@ function Order() {
     }
   };
 
+  // const delProduct = (product) => {
+  //   const itemIndex = orderProducts.findIndex(i => i.product.name === product.name);
+  //   console.log(itemIndex);
+
+  //   if (itemIndex === -1) {
+  //     const orderItem = { quantity: 1, product: product }
+  //     setOrderProducts(current => [...current, orderItem]);
+  //   } else {
+  //     const selectedProduct = orderProducts[itemIndex]
+  //     selectedProduct.quantity = selectedProduct.quantity-1
+  //     console.log(orderProducts);
+  //     setOrderProducts([...orderProducts]);
+  //   }
+  // };
 
   return (
     <div className="App">
@@ -117,10 +131,16 @@ function Order() {
         {orderProducts.map(orderProduct => (
           <p>
             nome: {orderProduct.product.name} quantidade:{" "}
-            {orderProduct.quantity} preco: {orderProduct.product.price} total:{" "}
-            {orderProduct.quantity * orderProduct.product.price}
+            {orderProduct.quantity} preco: {orderProduct.product.price}
+            total: {orderProduct.quantity * orderProduct.product.price}
           </p>
         ))}
+        <p>
+          Valor Total do Pedido:{" "}
+          <strong>
+            {orderProducts.reduce((total, orderProducts) => total + orderProducts.product.price, 0)} reais
+          </strong>
+        </p>
       </div>
       <h1>Menu</h1>
       <div>

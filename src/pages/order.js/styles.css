@@ -1,3 +1,5 @@
+*{margin:0; padding:0}
+
 .input-name, .input-number{
 
     border-radius: 18px;
@@ -10,12 +12,17 @@
 }
 
 .print-order {
-        width: '90%';
-        display: 'flex';
-        justify-content: space-between ;
-        align-items: center;
-        margin-top: 10px;  
-
+    width: 100%;
+    height: auto;
+    background: #da552f;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
 }
 
 
