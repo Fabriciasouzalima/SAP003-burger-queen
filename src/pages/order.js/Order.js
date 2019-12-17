@@ -1,69 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import Header from '../../components/Header/index.js';
+import AddClientInfo from '../../components/AddCliente/addclient.js'
 import Button from '../../components/Button/button.js';
-import Input from '../../components/Input/input.js'
 
 import firebase from '../../utils/firebaseUtils';
+
 import './styles.css';
 
 
-const AddClientInfo = () => {
-    const [client, setClient] = useState('');
-    const [table, setTable] = useState('');
-    const [pedidos, setPedidos] = useState([]);
-    const [total, setTotal] = useState('');
-    const [date, setDate] = useState('');
-    const [hour,setHour] = useState('')
-
-    function onSubmit(e) {
-        e.preventDefault()
-        
-        firebase
-            .firestore()
-            .collection('infoClient')
-            .add({
-                client,
-                table,
-                pedidos,
-                total,
-                date,
-                hour,
-            })
-            .then(()=>{
-               setTable('')
-               setClient('')
-               setPedidos('')
-               setTotal('')
-               setDate('')
-               setHour('')
-                
-            }) 
-    }
-  
-  return (
-    <div>
-      <label>
-        <strong>NOME DO CLIENTE</strong>
-      </label>
-      <Input
-        class="input-name"
-        type="text"
-        value={client}
-        onChange={e => setClient(e.currentTarget.value)}
-      />
-      <label>
-        <strong>NÚMERO DA MESA</strong>
-      </label>
-      <Input
-        class="input-number"
-        type="number"
-        value={table}
-        onChange={e => setTable(e.currentTarget.value)}
-      />
-      <Button class="itens" handleClick={onSubmit} title="Enviar Pedidos" />
-    </div>
-  );
-};
 
 function AllMenu(){
 
@@ -103,30 +47,33 @@ function Order() {
     } else {
       const selectedProduct = orderProducts[itemIndex]
       selectedProduct.quantity = selectedProduct.quantity+1
+      setOrderProducts([...orderProducts]);
+    }
+  };
+
+  const delProduct = (product) => {
+    const itemIndex = orderProducts.findIndex(i => i.product.name === product.name);
+    console.log(itemIndex);
+
+    if (itemIndex === -1) {
+      const orderItem = { quantity: 1, product: product }
+      setOrderProducts(current => [...current, orderItem]);
+    } else {
+      const selectedProduct = orderProducts[itemIndex]
+      selectedProduct.quantity = selectedProduct.quantity-1
       console.log(orderProducts);
       setOrderProducts([...orderProducts]);
     }
   };
 
-  // const delProduct = (product) => {
-  //   const itemIndex = orderProducts.findIndex(i => i.product.name === product.name);
-  //   console.log(itemIndex);
-
-  //   if (itemIndex === -1) {
-  //     const orderItem = { quantity: 1, product: product }
-  //     setOrderProducts(current => [...current, orderItem]);
-  //   } else {
-  //     const selectedProduct = orderProducts[itemIndex]
-  //     selectedProduct.quantity = selectedProduct.quantity-1
-  //     console.log(orderProducts);
-  //     setOrderProducts([...orderProducts]);
-  //   }
-  // };
-
   return (
     <div className="App">
       <Header />
-      <AddClientInfo />
+      <AddClientInfo
+      pedidos={orderProducts}
+      setOrderProducts={setOrderProducts} 
+      />
+
       <div className="print-order">
         {orderProducts.map(orderProduct => (
           <p>
@@ -135,27 +82,41 @@ function Order() {
             total: {orderProduct.quantity * orderProduct.product.price}
           </p>
         ))}
-        <p>
-          Valor Total do Pedido:{" "}
-          <strong>
-            {orderProducts.reduce((total, orderProducts) => total + orderProducts.product.price, 0)} reais
-          </strong>
-        </p>
       </div>
+      <p>
+        Valor Total do Pedido:{" "}
+        <strong>
+          {orderProducts.reduce(
+            (total, orderProduct) =>
+              total + orderProduct.quantity * orderProduct.product.price,
+            0
+          )}{" "}
+          reais
+        </strong>
+      </p>
       <h1>Menu</h1>
       <div>
         <h1>Café da Manha</h1>
         {existingProducts.map((product, i) => {
           return product.breakfast ? (
+            <>
             <Button
               key={i}
               handleClick={() => addProduct(product)}
               class="itens"
               title={`${product.name} ${product.price} reais`}
             />
+            <Button
+              key={i}
+              handleClick={() => delProduct(product)}
+              class="itens"
+              title={`delete`}
+            />
+            </>
           ) : (
             false
           );
+          
         })}
       </div>
       <div>
@@ -178,3 +139,4 @@ function Order() {
 }
 
 export default Order 
+
