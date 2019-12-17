@@ -52,35 +52,57 @@ function Order() {
   };
 
   const delProduct = (product) => {
-    const itemIndex = orderProducts.findIndex(i => i.product.name === product.name);
-    console.log(itemIndex);
+    const deletedProduct = orderProducts.map(elem => {
+      
 
-    if (itemIndex === -1) {
-      const orderItem = { quantity: 1, product: product }
-      setOrderProducts(current => [...current, orderItem]);
-    } else {
-      const selectedProduct = orderProducts[itemIndex]
-      selectedProduct.quantity = selectedProduct.quantity-1
-      console.log(orderProducts);
-      setOrderProducts([...orderProducts]);
-    }
+      if(elem.product.name === product.product.name ){
+        if(elem.quantity !== 0){
+          elem.quantity -= 1
+          return elem
+        } else{
+          return
+        }
+
+        
+      } else {
+        return elem
+      }
+    })
+
+    console.log(deletedProduct)
+    
+    setOrderProducts(deletedProduct)
+
+    
   };
+ 
 
   return (
     <div className="App">
       <Header />
       <AddClientInfo
       pedidos={orderProducts}
-      setOrderProducts={setOrderProducts} 
+      setOrderProducts={setOrderProducts}
+      // total={}
+      // setTotal={}
       />
 
       <div className="print-order">
-        {orderProducts.map(orderProduct => (
+        {orderProducts.map((orderProduct) => (
+          <>
           <p>
             nome: {orderProduct.product.name} quantidade:{" "}
             {orderProduct.quantity} preco: {orderProduct.product.price}
             total: {orderProduct.quantity * orderProduct.product.price}
           </p>
+          <Button
+              key={Math.random()}
+              handleClick={() => delProduct(orderProduct)}
+              class="itens"
+              title={`delete`}
+            />
+          </>
+          
         ))}
       </div>
       <p>
@@ -106,12 +128,7 @@ function Order() {
               class="itens"
               title={`${product.name} ${product.price} reais`}
             />
-            <Button
-              key={i}
-              handleClick={() => delProduct(product)}
-              class="itens"
-              title={`delete`}
-            />
+            
             </>
           ) : (
             false
@@ -123,12 +140,14 @@ function Order() {
         <h1>Almoço</h1>
         {existingProducts.map((product, i) => {
           return product.lunch ? (
+            <>
             <Button
               key={i}
               handleClick={() => addProduct(product)}
               class="itens"
               title={`${product.name} ${product.price} reais`}
             />
+            </>
           ) : (
             false
           );

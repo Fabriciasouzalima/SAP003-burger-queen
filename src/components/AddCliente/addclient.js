@@ -6,12 +6,13 @@ import firebase from '../../utils/firebaseUtils';
 const AddClientInfo = (props) => {
     const [client, setClient] = useState('');
     const [table, setTable] = useState('');
-    const [total, setTotal] = useState('');
-    const [date, setDate] = useState('');
-    const [hour,setHour] = useState('')
+    const [dateHour, setDateHour] = useState('')
+
 
     function onSubmit(e) {
         e.preventDefault()
+
+
         
         firebase
             .firestore()
@@ -20,17 +21,16 @@ const AddClientInfo = (props) => {
                 client,
                 table,
                 pedidos:props.pedidos,
-                total,
-                date,
-                hour,
+                total:props.total,
+                dateHour,
+
             })
             .then(()=>{
                setTable('')
                setClient('')
                props.setOrderProducts([])
-               setTotal('')
-               setDate('')
-               setHour('')
+               props.setTotal('')
+               setDateHour('')
                 
             }) 
     }
@@ -59,5 +59,8 @@ const AddClientInfo = (props) => {
     </div>
   );
 };
+
+// let date = new Date()
+// let hour = date.getHours()
 
 export default AddClientInfo
