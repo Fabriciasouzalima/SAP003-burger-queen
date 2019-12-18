@@ -60,7 +60,7 @@ function Order() {
           elem.quantity -= 1
           return elem
         } else{
-          return
+          return elem
         }
 
         

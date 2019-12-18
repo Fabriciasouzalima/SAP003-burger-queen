@@ -6,7 +6,6 @@ import firebase from '../../utils/firebaseUtils';
 const AddClientInfo = (props) => {
     const [client, setClient] = useState('');
     const [table, setTable] = useState('');
-    const [dateHour, setDateHour] = useState('')
 
 
     function onSubmit(e) {
@@ -21,23 +20,22 @@ const AddClientInfo = (props) => {
                 client,
                 table,
                 pedidos:props.pedidos,
-                total:props.total,
-                dateHour,
+               // total:props.total,
+                dateHour: new Date().toLocaleString("pt-BR"),
 
             })
             .then(()=>{
                setTable('')
                setClient('')
                props.setOrderProducts([])
-               props.setTotal('')
-               setDateHour('')
+              // props.setTotal('')
                 
             }) 
     }
   
   return (
-    <div>
-      <label>
+    <div className='top-page'>
+      <label className='text'>
         <strong>NOME DO CLIENTE</strong>
       </label>
       <Input
@@ -46,7 +44,7 @@ const AddClientInfo = (props) => {
         value={client}
         onChange={e => setClient(e.currentTarget.value)}
       />
-      <label>
+      <label className='text'>
         <strong>NÚMERO DA MESA</strong>
       </label>
       <Input
@@ -60,7 +58,5 @@ const AddClientInfo = (props) => {
   );
 };
 
-// let date = new Date()
-// let hour = date.getHours()
 
 export default AddClientInfo
