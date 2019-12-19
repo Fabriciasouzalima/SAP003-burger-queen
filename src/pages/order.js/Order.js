@@ -1,34 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Header from '../../components/Header/index.js';
 import AddClientInfo from '../../components/AddCliente/addclient.js'
 import Button from '../../components/Button/button.js';
-
-import firebase from '../../utils/firebaseUtils';
+import AllMenu from '../../components/AllMenu/allMenu.js'
 
 import './styles.css';
-
-
-
-function AllMenu(){
-
-  const [existingProducts, setExistingProducts] = useState([])
-
-useEffect(() => {
-  const unsubscribe = firebase
-    .firestore()
-    .collection('menu')
-    .onSnapshot((snapshot) => {
-      const dbExistingProducts = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data()
-      }))
-      setExistingProducts(dbExistingProducts)
-    })
-    return () => unsubscribe()
-}, [])
- return existingProducts
-}
-
 
 
 function Order() {
@@ -62,7 +38,6 @@ function Order() {
         } else{
           return elem
         }
-
         
       } else {
         return elem
@@ -81,72 +56,70 @@ function Order() {
     <div className="App">
       <Header />
       <AddClientInfo
-      pedidos={orderProducts}
-      setOrderProducts={setOrderProducts}
-      // total={}
-      // setTotal={}
+        pedidos={orderProducts}
+        setOrderProducts={setOrderProducts}
+        // total={}
+        // setTotal={}
       />
 
       <div className="print-order">
-        {orderProducts.map((orderProduct) => (
+        {orderProducts.map(orderProduct => (
           <>
-          <p>
-            nome: {orderProduct.product.name} quantidade:{" "}
-            {orderProduct.quantity} preco: {orderProduct.product.price}
-            total: {orderProduct.quantity * orderProduct.product.price}
-          </p>
-          <Button
+            <p>
+              nome: {orderProduct.product.name} quantidade:{" "}
+              {orderProduct.quantity} preco: {orderProduct.product.price}
+              total: {orderProduct.quantity * orderProduct.product.price}
+            </p>
+            <Button
               key={Math.random()}
               handleClick={() => delProduct(orderProduct)}
               class="itens"
               title={`delete`}
             />
           </>
-          
         ))}
+
+        <p className="total-order">
+          Valor Total do Pedido:{" "}
+          <strong>
+            {orderProducts.reduce(
+              (total, orderProduct) =>
+                total + orderProduct.quantity * orderProduct.product.price,
+              0
+            )}{" "}
+            reais
+          </strong>
+        </p>
       </div>
-      <p>
-        Valor Total do Pedido:{" "}
-        <strong>
-          {orderProducts.reduce(
-            (total, orderProduct) =>
-              total + orderProduct.quantity * orderProduct.product.price,
-            0
-          )}{" "}
-          reais
-        </strong>
-      </p>
+
+      <div className='products-list'>
       <h1>Menu</h1>
-      <div>
         <h1>Café da Manha</h1>
         {existingProducts.map((product, i) => {
           return product.breakfast ? (
             <>
-            <Button
-              key={i}
-              handleClick={() => addProduct(product)}
-              class="itens"
-              title={`${product.name} ${product.price} reais`}
-            />
-            
+              <Button
+                key={i}
+                handleClick={() => addProduct(product)}
+                class="itens"
+                title={`${product.name} ${product.price} reais`}
+              />
             </>
           ) : (
             false
           );
-          
         })}
-      </div>
-      <div>
+
         <h1>Almoço</h1>
         {existingProducts.map((product, i) => {
           return product.lunch ? (
             <>
-            <Button
-              key={i}
-              handleClick={() => addProduct(product)}
-              class="itens"
-              title={`${product.name} ${product.price} reais`}
-            />
+              <Button
+                key={i}
+                handleClick={() => addProduct(product)}
+                class="itens"
+                title={`${product.name} ${product.price} reais`}
+              />
             </>
           ) : (
             false
