@@ -20,7 +20,7 @@ const AddClientInfo = (props) => {
                 client,
                 table,
                 pedidos:props.pedidos,
-               // total:props.total,
+                total:props.total,
                 dateHour: new Date().toLocaleString("pt-BR"),
 
             })
@@ -28,7 +28,7 @@ const AddClientInfo = (props) => {
                setTable('')
                setClient('')
                props.setOrderProducts([])
-              // props.setTotal('')
+               props.setTotal('')
                 
             }) 
     }
