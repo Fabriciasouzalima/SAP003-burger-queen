@@ -3,7 +3,6 @@ import Header from "../../components/Header/index.js";
 import AddClientInfo from "../../components/AddCliente/addclient.js";
 import Button from "../../components/Button/button.js";
 import AllMenu from "../../components/AllMenu/allMenu.js";
-import Input from "../../components/Input/input.js"
 import Routes from '../../routes.js'
 
 import "./styles.css";
@@ -120,21 +119,6 @@ function Order() {
                   title={`${product.name} R$ ${product.price},00`}
                 />
               </>
-            ) : (
-              false
-            );
-          })}
-          {existingProducts.map(product => {
-            return product.options? (
-              <Input
-                type="radio"
-                class="itens"
-                // name={item.name}
-                // value={options}
-                // id={options + item.id}
-                // onChange={() => props.setState(op)}
-                // checked={op === props.state2}
-              />
             ) : (
               false
             );

@@ -1,17 +1,24 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
+import Order from './pages/order.js/Order.js';
+import Kitchen from './pages/Kitchen/Kitchen.js';
+import Header from './components/Header/index.js';
 
-import { BrowserRouter, Switch, Route} from 'react-router-dom';
+const App = () => {
+    return (
+        <Router>
+            <div>
+                <Header/>
+                <Switch>
+                    <Route exact path="/Order" component={Order} />
+                    <Route path="/Kitchen" component={Kitchen} />
+                </Switch>
+            </div>
+        </Router>);
+};
 
-import Order from './pages/order.js/Order.js'
-import clientOrders from './pages/Kitchen/Kitchen.js'
-
-const Routes = () => (
-    <BrowserRouter>
-     <Switch>
-         <Route exact path ='/' component={Order}/>
-         <Route path ='/products/:id' component={clientOrders}/>         
-     </Switch>
-    </BrowserRouter>
-);
-
-export default Routes; 
+export default App;

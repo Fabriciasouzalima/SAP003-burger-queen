@@ -1,11 +1,15 @@
 import React from 'react';
+import Header from "../../components/Header/index.js";
 import ClientOrders from '../../components/AllOrders/allOrders.js'
 
-import Routes from '../../routes.js'
 
 function KitchenOrders() {
   const existingOrders = ClientOrders() 
-  return console.log(existingOrders)
+  console.log(existingOrders)
+  
+  return (
+    <Header/>
+  )
 
 }
 
