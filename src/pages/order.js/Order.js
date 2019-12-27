@@ -3,8 +3,6 @@ import Header from "../../components/Header/index.js";
 import AddClientInfo from "../../components/AddCliente/addclient.js";
 import Button from "../../components/Button/button.js";
 import AllMenu from "../../components/AllMenu/allMenu.js";
-import Routes from '../../routes.js'
-
 import "./styles.css";
 
 function Order() {
@@ -59,8 +57,7 @@ function Order() {
 
   return (
     <div className="App">
-      <Header />
-      <Routes/>
+      <Header/>
       <AddClientInfo
         pedidos={orderProducts}
         setOrderProducts={setOrderProducts}
