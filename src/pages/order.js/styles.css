@@ -1,15 +1,5 @@
 *{margin:0; padding:0}
 
-/* .App {
-    display: flex;
-} */
-/* .App {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: flex-start; 
-}  */
-
 .Page{
     display: flex;
     flex-direction: row-reverse;
@@ -51,6 +41,8 @@ h1{
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+    border-radius: 20px;
+    padding: 5px;
 }
 
 .products-list{
@@ -59,7 +51,7 @@ h1{
     padding: 5px;
 }
 
-#btn-send {
+#btn-send, .btn-del{
     padding: 10px;
     border-radius: 5px;
     border: 0;
@@ -71,19 +63,11 @@ h1{
        
 }
 
-#btn-food [disabled]{
-    opacity: 0.5;
-    cursor: default;
+.btn-del{
+    background: #fff;
+    color: aqua;
+    display: flex;
 }
-
-
-#btn-food :hover{
-    opacity: 0.7;
-}
-
-#btn-food [disabled]:hover{
-    opacity: 0.5;
-} 
 
 .itens {
     flex-direction: column;
@@ -99,13 +83,4 @@ h1{
     margin-right: 5px;
     margin-left: 5px;
 }
-
-
-#btn-food :hover{
-    opacity: 0.7;
-}
-
-#btn-food [disabled]:hover{
-    opacity: 0.5;
-} 
 

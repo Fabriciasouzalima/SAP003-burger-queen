@@ -3,7 +3,6 @@ import firebase from '../../utils/firebaseUtils.js'
 
 function AllMenu() {
   const [existingProducts, setExistingProducts] = useState([]);
-
   useEffect(() => {
     const unsubscribe = firebase
       .firestore()
@@ -20,4 +19,4 @@ function AllMenu() {
   return existingProducts;
 }
 
-export default AllMenu 
+export default AllMenu; 

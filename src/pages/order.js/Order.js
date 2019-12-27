@@ -3,7 +3,8 @@ import Header from "../../components/Header/index.js";
 import AddClientInfo from "../../components/AddCliente/addclient.js";
 import Button from "../../components/Button/button.js";
 import AllMenu from "../../components/AllMenu/allMenu.js";
-import Radio from "../../components/Radio/radio.js";
+import Input from "../../components/Input/input.js"
+import Routes from '../../routes.js'
 
 import "./styles.css";
 
@@ -11,6 +12,8 @@ function Order() {
   const existingProducts = AllMenu();
   const [orderProducts, setOrderProducts] = useState([]);
   const [total, setTotal] = useState("");
+  
+  
 
   const addProduct = product => {
     const itemIndex = orderProducts.findIndex(
@@ -41,9 +44,9 @@ function Order() {
       return elem;
     });
 
-    let teste = deletedProduct.filter(elem => elem.quantity !== 0);
+    let delProduct = deletedProduct.filter(elem => elem.quantity !== 0);
 
-    return setOrderProducts(teste);
+    return setOrderProducts(delProduct);
   };
 
   useEffect(() => {
@@ -58,6 +61,7 @@ function Order() {
   return (
     <div className="App">
       <Header />
+      <Routes/>
       <AddClientInfo
         pedidos={orderProducts}
         setOrderProducts={setOrderProducts}
@@ -70,14 +74,14 @@ function Order() {
             <>
               <p>
                 nome: {orderProduct.product.name} quantidade:{" "}
-                {orderProduct.quantity} preco: {orderProduct.product.price}
+                {orderProduct.quantity} preço: {orderProduct.product.price},00
                 total: {orderProduct.quantity * orderProduct.product.price}
               </p>
               <Button
                 key={Math.random()}
                 handleClick={() => delProduct(orderProduct)}
-                class="itens"
-                title={`delete`}
+                class="btn-del"
+                title={`🗑`}
               />
             </>
           ))}
@@ -116,6 +120,21 @@ function Order() {
                   title={`${product.name} R$ ${product.price},00`}
                 />
               </>
+            ) : (
+              false
+            );
+          })}
+          {existingProducts.map(product => {
+            return product.options? (
+              <Input
+                type="radio"
+                class="itens"
+                // name={item.name}
+                // value={options}
+                // id={options + item.id}
+                // onChange={() => props.setState(op)}
+                // checked={op === props.state2}
+              />
             ) : (
               false
             );
