@@ -8,17 +8,17 @@ import Order from './pages/order.js/Order.js';
 import Kitchen from './pages/Kitchen/Kitchen.js';
 import Header from './components/Header/index.js';
 
-const App = () => {
+const Routes = () => {
     return (
         <Router>
             <div>
                 <Header/>
                 <Switch>
-                    <Route exact path="/Order" component={Order} />
-                    <Route path="/Kitchen" component={Kitchen} />
+                    <Route exact path="/order" component={Order} />
+                    <Route path="/kitchen" component={Kitchen} />
                 </Switch>
             </div>
         </Router>);
 };
 
-export default App;
+export default Routes;

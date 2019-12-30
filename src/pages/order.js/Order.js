@@ -57,7 +57,6 @@ function Order() {
 
   return (
     <div className="App">
-      <Header/>
       <AddClientInfo
         pedidos={orderProducts}
         setOrderProducts={setOrderProducts}

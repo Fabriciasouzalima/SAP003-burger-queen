@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Order from './pages/order.js/Order';
+import Routes from './routes'
 
 
 
-ReactDOM.render(<Order/>, document.getElementById('root'));
+ReactDOM.render(<Routes/>, document.getElementById('root'));
 
 
