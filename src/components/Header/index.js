@@ -10,7 +10,7 @@ const Header = () => (
   <header className="main-header">
     <img width={"50px"} src={Logo} alt="Logo Burger Queen" />
     BURGER QUEEN
-    <Link>
+    <Link className="links">
       <Link to="/kitchen" className="links">
         Cozinha
       </Link>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Header from "../../components/Header/index.js";
 import AddClientInfo from "../../components/AddCliente/addclient.js";
 import Button from "../../components/Button/button.js";
 import AllMenu from "../../components/AllMenu/allMenu.js";
@@ -9,8 +8,7 @@ function Order() {
   const existingProducts = AllMenu();
   const [orderProducts, setOrderProducts] = useState([]);
   const [total, setTotal] = useState("");
-  
-  
+    
 
   const addProduct = product => {
     const itemIndex = orderProducts.findIndex(

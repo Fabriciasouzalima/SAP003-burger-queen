@@ -4,6 +4,7 @@ import firebase from '../../utils/firebaseUtils.js'
 function ClientOrders() {
   
   const [existingOrders, setExistingOrders] = useState([]);
+  
   useEffect(() => {
     const unsubscribe = firebase
       .firestore()

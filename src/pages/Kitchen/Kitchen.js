@@ -1,5 +1,5 @@
 import React from 'react';
-//import Header from "../../components/Header/index.js";
+
 import ClientOrders from '../../components/AllOrders/allOrders.js'
 
 
@@ -8,8 +8,10 @@ function Kitchen() {
   console.log(existingOrders)
   
   return (
-    // <Header/>
-    <h1>to na cozinha</h1>
+    <div>
+    <h1>Será que vai da certo?</h1>
+    {existingOrders.map(()=>{})}
+    </div>
   )
 
 }
