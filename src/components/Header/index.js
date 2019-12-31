@@ -11,11 +11,11 @@ const Header = () => (
     <img width={"50px"} src={Logo} alt="Logo Burger Queen" />
     BURGER QUEEN
     <Link className="links">
-      <Link to="/kitchen" className="links">
-        Cozinha
-      </Link>
       <Link to="/order" className="links">
         Salão
+      </Link>
+      <Link to="/kitchen" className="links">
+        Cozinha
       </Link>
     </Link>
   </header>

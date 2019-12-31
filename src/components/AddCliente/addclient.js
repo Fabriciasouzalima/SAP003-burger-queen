@@ -15,14 +15,14 @@ const AddClientInfo = (props) => {
         
         firebase
             .firestore()
-            .collection('infoClient')
+            .collection('Orders')
             .add({
                 client,
                 table,
                 pedidos:props.pedidos,
                 total:props.total,
                 dateHour: new Date().toLocaleString("pt-BR"),
-
+                status: "toDeliver"
             })
             .then(()=>{
                setTable('')

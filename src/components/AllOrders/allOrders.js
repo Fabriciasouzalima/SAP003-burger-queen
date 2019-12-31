@@ -8,7 +8,7 @@ function ClientOrders() {
   useEffect(() => {
     const unsubscribe = firebase
       .firestore()
-      .collection("infoClient")
+      .collection("Orders")
       .onSnapshot(snapshot => {
         const dbOrders = snapshot.docs.map(doc => ({
           id: doc.id,
