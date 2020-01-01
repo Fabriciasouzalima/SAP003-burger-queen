@@ -6,24 +6,31 @@ import "./styles.css"
 
 function Kitchen() {
   const existingOrders = ClientOrders() 
-  console.log(existingOrders)
-
+  console.log(existingOrders);
+  
   
   return (
     <div>
-      <h1>Ordens em Andamento</h1>
       {existingOrders.map(existingOrders => (
-        <ul>
-          <li>
-            Cliente: {existingOrders.client}
+        <>
+          <div className="container">
+            {existingOrders.dateHour}
+    
+            Cliente:{existingOrders.client} 
             Mesa: {existingOrders.table}
-            Total: R$ {existingOrders.total},00 
-            pedidos:
+
+            
+            Pedidos:
             {existingOrders.pedidos.map(
-              products => (products.product.name) 
-            )}     
-          </li>
-        </ul>
+              products => ( products.quantity + products.product.name) 
+              )}   
+            Total: R$ {existingOrders.total},00 
+            
+            
+             Status Pedido:{existingOrders.status}
+            
+          </div>
+        </>   
       ))}
     </div>
   );

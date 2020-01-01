@@ -22,7 +22,7 @@ const AddClientInfo = (props) => {
                 pedidos:props.pedidos,
                 total:props.total,
                 dateHour: new Date().toLocaleString("pt-BR"),
-                status: "toDeliver"
+                status: "enviado"
             })
             .then(()=>{
                setTable('')
