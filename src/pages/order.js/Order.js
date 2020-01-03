@@ -52,6 +52,17 @@ function Order() {
     );
     setTotal(orderTotal);
   }, [orderProducts]);
+   
+  // function addOptions() {
+    
+  //   existingProducts.map(product => {
+  //     if(product.burger && product.options.length !== 0){ 
+  //       console.log(product.options, "opção");
+  //     }
+  //   })
+
+  // };
+
 
   return (
     <div className="App">
@@ -104,7 +115,7 @@ function Order() {
 
           <h1>Almoço/Jantar</h1>
           {existingProducts.map((product, i) => {
-            return product.lunch ? (
+            return product.lunch || product.burger ? (
               <>
                 <Button
                   key={i}
@@ -117,6 +128,13 @@ function Order() {
               false
             );
           })}
+          <>
+            {existingProducts.map(product => {
+              if(product.burger && product.options.length !== 0){ 
+                console.log(product.options, "opção");
+              }
+            })}
+          </> 
         </div>
       </section>
     </div>

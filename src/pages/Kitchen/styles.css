@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    flex-direction: column; 
     padding: 5px;
     background: #da552f;
     font-size: 18px;
@@ -15,3 +14,12 @@
     border-radius: 20px;
 }
 
+.card{
+    flex-direction: row; 
+}
+
+.btn-status{
+    background: green;
+    color: #fff;
+    display: flex;
+}

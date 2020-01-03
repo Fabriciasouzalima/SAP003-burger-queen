@@ -12,25 +12,24 @@ function Kitchen() {
   return (
     <div>
       {existingOrders.map(existingOrders => (
-        <>
-          <div className="container">
-            {existingOrders.dateHour}
-    
-            Cliente:{existingOrders.client} 
+        <section className="container">
+          <div className="card">
+            <p>{existingOrders.dateHour}</p>
+            Cliente:{existingOrders.client}
             Mesa: {existingOrders.table}
-
-            
-            Pedidos:
-            {existingOrders.pedidos.map(
-              products => ( products.quantity + products.product.name) 
-              )}   
-            Total: R$ {existingOrders.total},00 
-            
-            
-             Status Pedido:{existingOrders.status}
-            
+            <ul>
+              Pedidos:
+              {existingOrders.pedidos.map(
+                products => products.quantity + products.product.name
+              )}
+              <p>Total: R$ {existingOrders.total},00</p>
+              <button className="btn-status">
+                Pedido:
+                {existingOrders.status}
+              </button>
+            </ul>
           </div>
-        </>   
+        </section>
       ))}
     </div>
   );
