@@ -8,7 +8,7 @@ function Order() {
   const existingProducts = AllMenu();
   const [orderProducts, setOrderProducts] = useState([]);
   const [total, setTotal] = useState("");
-    
+  //const [options, setOptions] = useState("")
 
   const addProduct = product => {
     const itemIndex = orderProducts.findIndex(
@@ -52,17 +52,14 @@ function Order() {
     );
     setTotal(orderTotal);
   }, [orderProducts]);
-   
-  // function addOptions() {
-    
-  //   existingProducts.map(product => {
-  //     if(product.burger && product.options.length !== 0){ 
-  //       console.log(product.options, "opção");
-  //     }
-  //   })
 
-  // };
-
+  function addOptions() {
+    existingProducts.map(product => {
+      if (product.burger && product.options.length !== 0) {
+        console.log(product.options);
+      }
+    });
+  }
 
   return (
     <div className="App">
@@ -128,13 +125,6 @@ function Order() {
               false
             );
           })}
-          <>
-            {existingProducts.map(product => {
-              if(product.burger && product.options.length !== 0){ 
-                console.log(product.options, "opção");
-              }
-            })}
-          </> 
         </div>
       </section>
     </div>
