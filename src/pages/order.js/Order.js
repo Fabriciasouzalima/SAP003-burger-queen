@@ -53,13 +53,21 @@ function Order() {
     setTotal(orderTotal);
   }, [orderProducts]);
 
-  function addOptions() {
-    existingProducts.map(product => {
-      if (product.burger && product.options.length !== 0) {
-        console.log(product.options);
-      }
-    });
-  }
+  // const orderOptions = () => {
+  //   const [order, setOrder] = useState([]);
+  //   const [flavour, setFlavour] = useState('Bovino');
+  //   const [extras, setExtras] = useState('Queijo');
+
+  //   const onChangeRadio = (e) => {
+  //       const type = e.target.parentElement.parentElement.firstElementChild.textContent;
+  //       if (type === 'Sabor:') {
+  //           setFlavour(e.target.id);
+  //       } else {
+  //           setExtras(e.target.id);
+  //       }
+  
+  //   }
+  // }
 
   return (
     <div className="App">
@@ -125,6 +133,13 @@ function Order() {
               false
             );
           })}
+          <>
+            {existingProducts.map(product => {
+              if (product.burger && product.options.length !== 0) {
+                console.log(product.options);
+              }
+            })}
+          </>
         </div>
       </section>
     </div>

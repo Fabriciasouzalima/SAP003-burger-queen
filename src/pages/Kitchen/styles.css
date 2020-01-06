@@ -1,24 +1,26 @@
-.container{
-    margin-top: 60px;
+.cardBox{
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    padding: 10px;
+    
+}
+
+.container{
     padding: 5px;
+    margin: 2vw;
     background: #da552f;
     font-size: 18px;
     font-weight: bold;
     color: #fff;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
     border-radius: 20px;
 }
 
-.card{
-    flex-direction: row; 
-}
 
 .btn-status{
+    padding: 5px;
     background: green;
     color: #fff;
     display: flex;

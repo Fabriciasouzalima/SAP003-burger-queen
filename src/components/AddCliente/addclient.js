@@ -10,9 +10,7 @@ const AddClientInfo = (props) => {
 
     function onSubmit(e) {
         e.preventDefault()
-
-
-        
+       
         firebase
             .firestore()
             .collection('Orders')
@@ -22,7 +20,7 @@ const AddClientInfo = (props) => {
                 pedidos:props.pedidos,
                 total:props.total,
                 dateHour: new Date().toLocaleString("pt-BR"),
-                status: "enviado"
+                status: "Em preparo"
             })
             .then(()=>{
                setTable('')

@@ -10,7 +10,7 @@ function Kitchen() {
   
   
   return (
-    <div>
+    <section className="cardBox">
       {existingOrders.map(existingOrders => (
         <section className="container">
           <div className="card">
@@ -20,7 +20,7 @@ function Kitchen() {
             <ul>
               Pedidos:
               {existingOrders.pedidos.map(
-                products => products.quantity + products.product.name
+                products => <div>{products.quantity} {products.product.name}</div>
               )}
               <p>Total: R$ {existingOrders.total},00</p>
               <button className="btn-status">
@@ -31,7 +31,7 @@ function Kitchen() {
           </div>
         </section>
       ))}
-    </div>
+    </section>
   );
 
 }
