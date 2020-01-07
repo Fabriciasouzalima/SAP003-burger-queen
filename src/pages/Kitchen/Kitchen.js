@@ -14,14 +14,14 @@ function Kitchen() {
     
     firebase
     .firestore().collection('Orders').doc(item.id).update({
-      status: 'toDeliver',
+      status: 'Em preparo',
       hourDone: new Date(),
       hourD: new Date().getHours(),
       minD: new Date().getMinutes(),
       secD: new Date().getSeconds(),
     })
     .then(() => {
-      console.log('uhul');
+      console.log('guardei info');
     })
   }
   

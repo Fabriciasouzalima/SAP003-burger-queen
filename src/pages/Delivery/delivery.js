@@ -23,7 +23,7 @@ function Delivery() {
   const conclud = (item) => {
     firebase
       .firestore().collection('Orders').doc(item.id).update({
-        status: 'concluded',
+        status: 'Pronto',
         hourConclud: new Date(),
         hourC: new Date().getHours(),
         minC: new Date().getMinutes(),
