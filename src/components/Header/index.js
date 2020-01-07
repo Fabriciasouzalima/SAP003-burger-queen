@@ -17,6 +17,9 @@ const Header = () => (
       <Link to="/kitchen" className="links">
         Cozinha
       </Link>
+      <Link to="/Delivery" className="links">
+       Delivery
+      </Link>
     </Link>
   </header>
 );

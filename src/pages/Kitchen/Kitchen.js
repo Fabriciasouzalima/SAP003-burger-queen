@@ -1,5 +1,7 @@
 import React from 'react';
 import ClientOrders from '../../components/AllOrders/allOrders.js'
+import Button from "../../components/Button/button.js";
+import firebase from '../../utils/firebaseUtils';
 
 import "./styles.css"
 
@@ -8,6 +10,20 @@ function Kitchen() {
   const existingOrders = ClientOrders() 
   console.log(existingOrders);
   
+  const confirm = (item) => {
+    
+    firebase
+    .firestore().collection('Orders').doc(item.id).update({
+      status: 'toDeliver',
+      hourDone: new Date(),
+      hourD: new Date().getHours(),
+      minD: new Date().getMinutes(),
+      secD: new Date().getSeconds(),
+    })
+    .then(() => {
+      console.log('uhul');
+    })
+  }
   
   return (
     <section className="cardBox">
@@ -23,10 +39,13 @@ function Kitchen() {
                 products => <div>{products.quantity} {products.product.name}</div>
               )}
               <p>Total: R$ {existingOrders.total},00</p>
-              <button className="btn-status">
-                Pedido:
-                {existingOrders.status}
-              </button>
+              <>
+                <Button
+                  handleClick={() => confirm()}
+                  class="btn-status"
+                  title={`${existingOrders.status}`}
+                />
+              </>
             </ul>
           </div>
         </section>

@@ -20,6 +20,10 @@ const AddClientInfo = (props) => {
                 pedidos:props.pedidos,
                 total:props.total,
                 dateHour: new Date().toLocaleString("pt-BR"),
+                hourSend: new Date(),
+                hourS: new Date().getHours(),
+                minS: new Date().getMinutes(),
+                secS: new Date().getSeconds(),
                 status: "Em preparo"
             })
             .then(()=>{
