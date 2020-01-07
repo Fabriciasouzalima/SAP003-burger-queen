@@ -8,11 +8,16 @@ function Order() {
   const existingProducts = AllMenu();
   const [orderProducts, setOrderProducts] = useState([]);
   const [total, setTotal] = useState("");
-  //const [options, setOptions] = useState("")
+  const [options, setOptions] = useState("");
+  const [extra, setExtra] = useState("")
 
   const addProduct = product => {
+
     const itemIndex = orderProducts.findIndex(
-      i => i.product.name === product.name
+      i =>
+        i.product.name === product.name &&
+        product.selectedOptions === i.product.selectedOptions &&
+        product.selectedExtra === i.product.selectedExtra
     );
     console.log(itemIndex);
 
@@ -24,8 +29,12 @@ function Order() {
       selectedProduct.quantity = selectedProduct.quantity + 1;
       setOrderProducts([...orderProducts]);
     }
+
+    setOptions("");
+    setExtra("");
   };
 
+  
   const delProduct = product => {
     const deletedProduct = orderProducts.map(elem => {
       if (elem.product.name === product.product.name) {
@@ -38,12 +47,12 @@ function Order() {
       }
       return elem;
     });
-
+    
     let delProduct = deletedProduct.filter(elem => elem.quantity !== 0);
-
+    
     return setOrderProducts(delProduct);
   };
-
+  
   useEffect(() => {
     const orderTotal = orderProducts.reduce(
       (total, orderProduct) =>
@@ -53,21 +62,103 @@ function Order() {
     setTotal(orderTotal);
   }, [orderProducts]);
 
-  // const orderOptions = () => {
-  //   const [order, setOrder] = useState([]);
-  //   const [flavour, setFlavour] = useState('Bovino');
-  //   const [extras, setExtras] = useState('Queijo');
+  const extraCheckbox = e => {
+    e.persist();
+    setExtra([...extra, e.target.value])
+  };
 
-  //   const onChangeRadio = (e) => {
-  //       const type = e.target.parentElement.parentElement.firstElementChild.textContent;
-  //       if (type === 'Sabor:') {
-  //           setFlavour(e.target.id);
-  //       } else {
-  //           setExtras(e.target.id);
-  //       }
+  const radioOnChange = e => {
+    e.persist();
+    setOptions(e.target.value);
+  };
+
+  const renderProductsBreakfast = () => {
+    return existingProducts.map((product, i) => {
+      return product.breakfast ? (
+        <>
+          <Button
+            key={i}
+            handleClick={() => addProduct(product)}
+            class="itens"
+            title={`${product.name} R$ ${product.price},00`}
+          />
+        </>
+      ) : (
+        false
+      );
+    })
+  }
   
-  //   }
-  // }
+
+  const renderProducts = () => {
+    return existingProducts.map((product, i) => {
+      if (product.lunch) {
+        return (
+          <Button
+            key={i}
+            handleClick={() => addProduct(product)}
+            class="itens"
+            title={`${product.name} R$ ${product.price},00`}
+          />
+        );
+      } else if (product.burger) {
+        return (
+          <>
+            <Button
+              key={i}
+              handleClick={() =>
+                addProduct({
+                  ...product,
+                  selectedOptions: options,
+                  selectedExtra: extra,
+                })
+              }
+              class="itens"
+              title={`${product.name} R$ ${product.price},00`}
+              disabled={options === ""}
+              //disabled={extra===""}
+            />
+            <div>
+              <p>Opções</p>
+              {product.options.map(option => {
+                return (
+                  <>
+                    <label>{option}</label>
+                    <input
+                      type="radio"
+                      value={option}
+                      onChange={radioOnChange}
+                      checked={option === options}
+                    />
+                  </>
+                );
+              })}
+              <p>Extras</p>
+
+              <>
+                <input
+                  type="checkbox"
+                  value="Queijo"
+                  onChange={extraCheckbox}
+  
+                />
+                Queijo
+                <input
+                  type="checkbox"
+                  value="Ovo"
+                  onChange={extraCheckbox}
+
+                />
+                Ovo
+              </>
+            </div>
+          </>
+        );
+      }
+      return null;
+    });
+  };
+  console.log(extra)
 
   return (
     <div className="App">
@@ -82,7 +173,8 @@ function Order() {
           {orderProducts.map(orderProduct => (
             <>
               <p>
-                nome: {orderProduct.product.name} quantidade:{" "}
+                nome: {orderProduct.product.name}{" "}
+                {orderProduct.product.selectedOptions} quantidade:{" "}
                 {orderProduct.quantity} preço: {orderProduct.product.price},00
                 total: {orderProduct.quantity * orderProduct.product.price}
               </p>
@@ -103,43 +195,9 @@ function Order() {
         <div className="products-list">
           <h1>Menu</h1>
           <h1>Café da Manhã</h1>
-          {existingProducts.map((product, i) => {
-            return product.breakfast ? (
-              <>
-                <Button
-                  key={i}
-                  handleClick={() => addProduct(product)}
-                  class="itens"
-                  title={`${product.name} R$ ${product.price},00`}
-                />
-              </>
-            ) : (
-              false
-            );
-          })}
-
+          {renderProductsBreakfast()}
           <h1>Almoço/Jantar</h1>
-          {existingProducts.map((product, i) => {
-            return product.lunch || product.burger ? (
-              <>
-                <Button
-                  key={i}
-                  handleClick={() => addProduct(product)}
-                  class="itens"
-                  title={`${product.name} R$ ${product.price},00`}
-                />
-              </>
-            ) : (
-              false
-            );
-          })}
-          <>
-            {existingProducts.map(product => {
-              if (product.burger && product.options.length !== 0) {
-                console.log(product.options);
-              }
-            })}
-          </>
+          {renderProducts()}
         </div>
       </section>
     </div>

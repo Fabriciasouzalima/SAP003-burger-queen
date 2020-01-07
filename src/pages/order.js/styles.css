@@ -18,6 +18,7 @@ h1{
     align-items: center;
 }
 
+
 .input-name, .input-number{
     border-radius: 18px;
     width: 238px;
@@ -44,6 +45,8 @@ h1{
     border-radius: 20px;
     padding: 5px;
 }
+
+
 
 .products-list{
     width: 50%;

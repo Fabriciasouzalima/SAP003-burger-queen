@@ -10,20 +10,25 @@ function Kitchen() {
   const existingOrders = ClientOrders() 
   console.log(existingOrders);
   
-  const confirm = (item) => {
-    
+  
+  const confirm = existingOrders => {
+    console.log(existingOrders.id);
+
     firebase
-    .firestore().collection('Orders').doc(item.id).update({
-      status: 'Em preparo',
-      hourDone: new Date(),
-      hourD: new Date().getHours(),
-      minD: new Date().getMinutes(),
-      secD: new Date().getSeconds(),
-    })
-    .then(() => {
-      console.log('guardei info');
-    })
-  }
+      .firestore()
+      .collection("Orders")
+      .doc(existingOrders.id)
+      .update({
+        status: "Em preparo",
+        hourDone: new Date(),
+        hourD: new Date().getHours(),
+        minD: new Date().getMinutes(),
+        secD: new Date().getSeconds()
+      })
+      .then(() => {
+        console.log("guardei info");
+      });
+  };
   
   return (
     <section className="cardBox">
@@ -31,21 +36,28 @@ function Kitchen() {
         <section className="container">
           <div className="card">
             <p>{existingOrders.dateHour}</p>
-            Cliente:{existingOrders.client}
-            Mesa: {existingOrders.table}
+            <div>
+              Cliente:{existingOrders.client}
+              <div>Mesa: {existingOrders.table}</div>
+            </div>
             <ul>
               Pedidos:
-              {existingOrders.pedidos.map(
-                products => <div>{products.quantity} {products.product.name}</div>
-              )}
-              <p>Total: R$ {existingOrders.total},00</p>
-              <>
-                <Button
-                  handleClick={() => confirm()}
-                  class="btn-status"
-                  title={`${existingOrders.status}`}
-                />
-              </>
+              {existingOrders.pedidos.map(products => (
+                <>
+                  <div>
+                    {products.quantity} x {products.product.name}{" "}
+                    {products.product.selectedOptions}
+                  </div>
+                  <p>extras : {products.product.selectedExtra}</p>
+                  <p>Total: R$ {existingOrders.total},00</p>
+
+                  <Button
+                    handleClick={() => confirm(existingOrders)}
+                    class="btn-status"
+                    title={`${existingOrders.status}`}
+                  />
+                </>
+              ))}
             </ul>
           </div>
         </section>

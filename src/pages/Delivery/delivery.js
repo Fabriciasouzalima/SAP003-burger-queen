@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import ClientOrders from '../../components/AllOrders/allOrders.js'
 import firebase from '../../utils/firebaseUtils.js';
 
 
 
 function Delivery() {
-
+  const existingOrders = ClientOrders() 
+  console.log(existingOrders);
+  
   const [delivery, setDelivery] = useState([]);
 
   useEffect(() => {
@@ -20,20 +23,22 @@ function Delivery() {
       })
   }, [])
 
-  const conclud = (item) => {
+  const done = existingOrders => {
     firebase
-      .firestore().collection('Orders').doc(item.id).update({
-        status: 'Pronto',
+      .firestore()
+      .collection("Orders")
+      .doc(existingOrders.id)
+      .update({
+        status: "Pronto",
         hourConclud: new Date(),
         hourC: new Date().getHours(),
         minC: new Date().getMinutes(),
-        secC: new Date().getSeconds(),
+        secC: new Date().getSeconds()
       })
       .then(() => {
-        console.log('finish');
-      })
-
-  }
+        console.log("finish");
+      });
+  };
 
   const time = (item) => {
     let seconds = (((item.hourD*3600)+(item.minD*60)+(item.secD)) - ((item.hourS*3600)+(item.minS*60)+(item.minS)))
@@ -66,7 +71,7 @@ function Delivery() {
                       <p>{itens.name} - Qtd:{itens.count} </p>}                       
                   </div> 
                 )}
-              <button onClick={() => conclud(item)}>entregue!</button> 
+              <button onClick={() => done(item)}>entregue!</button> 
               <div>O pedido ficou pronto em: {time(item)}</div>
               {console.log(time(item))}
             </div>

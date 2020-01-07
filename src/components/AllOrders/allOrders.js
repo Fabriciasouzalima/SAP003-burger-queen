@@ -9,6 +9,7 @@ function ClientOrders() {
     const unsubscribe = firebase
       .firestore()
       .collection("Orders")
+      .orderBy('hourSend','asc')
       .onSnapshot(snapshot => {
         const dbOrders = snapshot.docs.map(doc => ({
           id: doc.id,
