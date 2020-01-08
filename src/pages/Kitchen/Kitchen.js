@@ -50,14 +50,16 @@ function Kitchen() {
                   </div>
                   <p>extras : {products.product.selectedExtra}</p>
                   <p>Total: R$ {existingOrders.total},00</p>
-
-                  <Button
-                    handleClick={() => confirm(existingOrders)}
-                    class="btn-status"
-                    title={`${existingOrders.status}`}
-                  />
+                 
                 </>
+                 
+ 
               ))}
+              <Button
+                handleClick={() => confirm(existingOrders)}
+                class="btn-status"
+                title={`${existingOrders.status}`}
+              />
             </ul>
           </div>
         </section>

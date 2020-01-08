@@ -21,7 +21,10 @@
 
 .btn-status{
     padding: 5px;
-    background: green;
-    color: #fff;
+    background:#b8c007;
+    border-radius: 10px;
+    border-color:#da552f;
+    color: #5A200f;
+    font-weight: bold;
     display: flex;
 }

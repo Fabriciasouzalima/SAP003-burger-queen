@@ -60,7 +60,7 @@ function Delivery() {
 
         {delivery.map((item, index) =>
         <div key={index}>
-          {item.status === 'toDeliver' ?
+          {item.status === 'Pronto' ?
             <div>
               <h3>{item.client} - {item.table}</h3>
                 {item.resumo.map((itens, index) =>

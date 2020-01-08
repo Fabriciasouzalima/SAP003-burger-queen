@@ -64,7 +64,9 @@ function Order() {
 
   const extraCheckbox = e => {
     e.persist();
-    setExtra([...extra, e.target.value])
+    if (!extra.includes(e.target.value)){
+      setExtra([...extra, e.target.value])
+    }    
   };
 
   const radioOnChange = e => {
@@ -89,10 +91,11 @@ function Order() {
     })
   }
   
-
+     
   const renderProducts = () => {
     return existingProducts.map((product, i) => {
       if (product.lunch) {
+  
         return (
           <Button
             key={i}
@@ -102,56 +105,54 @@ function Order() {
           />
         );
       } else if (product.burger) {
+
+        const newPrice = product.price + extra.length
+    
         return (
           <>
-            <Button
-              key={i}
-              handleClick={() =>
-                addProduct({
-                  ...product,
-                  selectedOptions: options,
-                  selectedExtra: extra,
-                })
-              }
-              class="itens"
-              title={`${product.name} R$ ${product.price},00`}
-              disabled={options === ""}
-              //disabled={extra===""}
-            />
-            <div>
-              <p>Opções</p>
-              {product.options.map(option => {
-                return (
-                  <>
-                    <label>{option}</label>
-                    <input
-                      type="radio"
-                      value={option}
-                      onChange={radioOnChange}
-                      checked={option === options}
-                    />
-                  </>
-                );
-              })}
-              <p>Extras</p>
-
-              <>
-                <input
-                  type="checkbox"
-                  value="Queijo"
-                  onChange={extraCheckbox}
-  
-                />
-                Queijo
-                <input
-                  type="checkbox"
-                  value="Ovo"
-                  onChange={extraCheckbox}
-
-                />
-                Ovo
-              </>
-            </div>
+            <form class="boxItens">
+              <Button
+                key={i}
+                handleClick={() =>
+                  addProduct({
+                    ...product,
+                    selectedOptions: options,
+                    selectedExtra: extra,
+                    price: newPrice
+                  })
+                }
+                class="itens"
+                title={`${product.name} R$ ${product.price},00`}
+                disabled={options === ""}
+              />
+              <div>
+                <p>Opções</p>
+                {product.options.map(option => {
+                  return (
+                    <>
+                      <label>{option}</label>
+                      <input
+                        type="radio"
+                        value={option}
+                        onChange={radioOnChange}
+                        checked={option === options}
+                      />
+                    </>
+                  );
+                })}
+                <p>Extras</p>
+                <>
+                  <input
+                    type="checkbox"
+                    value="Queijo"
+                    onChange={extraCheckbox}
+                  />
+                  Queijo
+                  <input type="checkbox" value="Ovo" onChange={extraCheckbox} />
+                  Ovo
+                </>
+              </div>
+            </form>
           </>
         );
       }
@@ -159,8 +160,11 @@ function Order() {
     });
   };
   console.log(extra)
+ console.log(orderProducts);
+ 
 
   return (
+    
     <div className="App">
       <AddClientInfo
         pedidos={orderProducts}
@@ -171,12 +175,13 @@ function Order() {
       <section className="Page">
         <div className="print-order">
           {orderProducts.map(orderProduct => (
+
             <>
               <p>
                 nome: {orderProduct.product.name}{" "}
                 {orderProduct.product.selectedOptions} quantidade:{" "}
-                {orderProduct.quantity} preço: {orderProduct.product.price},00
-                total: {orderProduct.quantity * orderProduct.product.price}
+                {orderProduct.quantity} preço (unidade): {orderProduct.product.price},00
+                total: {orderProduct.quantity * orderProduct.product.price},00
               </p>
               <Button
                 key={Math.random()}
