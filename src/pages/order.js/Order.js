@@ -9,7 +9,7 @@ function Order() {
   const [orderProducts, setOrderProducts] = useState([]);
   const [total, setTotal] = useState("");
   const [options, setOptions] = useState("");
-  const [extra, setExtra] = useState("")
+  const [extra, setExtra] = useState([])
 
 
   const addProduct = product => {
@@ -20,7 +20,7 @@ function Order() {
         product.selectedOptions === i.product.selectedOptions &&
         product.selectedExtra === i.product.selectedExtra 
     );
-    console.log(itemIndex);
+  
 
     if (itemIndex === -1) {
       const orderItem = { quantity: 1, product: product };
@@ -32,19 +32,18 @@ function Order() {
     }
 
     setOptions("");
+    setExtra("")
 
   };
 
-  console.log(orderProducts);
-  
   const delProduct = product => {
     
     const deletedProduct = orderProducts.map(elem => {
       if (
         elem.product.name === product.product.name &&
-        elem.product.selectedOptions === product.product.selectedOptions
+        elem.product.selectedOptions === product.product.selectedOptions &&
+        elem.product.selectedExtra === product.product.selectedExtra
       ) {
-        
         if (elem.quantity !== 0) {
           elem.quantity -= 1;
           return elem;
@@ -73,7 +72,9 @@ function Order() {
     e.persist();
     if (!extra.includes(e.target.value)){
       setExtra([...extra, e.target.value])
-    }    
+    } else {
+      setExtra(extra.filter(ex => ex !== e.target.value))
+    } 
   };
 
   const radioOnChange = e => {
@@ -149,15 +150,20 @@ function Order() {
                 })}
                 <p>Extras</p>
                 <>
-                  <input
+                 {product.extra.map(extraSel=> {
+                  return (
+                   <>
+                   <label>{extraSel}</label>
+                   <input
                     type="checkbox"
-                    value="Queijo"
+                    value={extraSel}
                     onChange={extraCheckbox}
-                    
-                  />
-                  Queijo
-                  <input type="checkbox" value="Ovo" onChange={extraCheckbox} />
-                  Ovo
+                    checked={extra.includes(extraSel)}
+                   />
+                  </>
+                  )})}
+
+                  
                 </>
               </div>
             </form>
