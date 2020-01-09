@@ -11,13 +11,14 @@ function Order() {
   const [options, setOptions] = useState("");
   const [extra, setExtra] = useState("")
 
+
   const addProduct = product => {
 
     const itemIndex = orderProducts.findIndex(
       i =>
         i.product.name === product.name &&
         product.selectedOptions === i.product.selectedOptions &&
-        product.selectedExtra === i.product.selectedExtra
+        product.selectedExtra === i.product.selectedExtra 
     );
     console.log(itemIndex);
 
@@ -31,13 +32,19 @@ function Order() {
     }
 
     setOptions("");
-    setExtra("");
+
   };
 
+  console.log(orderProducts);
   
   const delProduct = product => {
+    
     const deletedProduct = orderProducts.map(elem => {
-      if (elem.product.name === product.product.name) {
+      if (
+        elem.product.name === product.product.name &&
+        elem.product.selectedOptions === product.product.selectedOptions
+      ) {
+        
         if (elem.quantity !== 0) {
           elem.quantity -= 1;
           return elem;
@@ -47,9 +54,9 @@ function Order() {
       }
       return elem;
     });
-    
+
     let delProduct = deletedProduct.filter(elem => elem.quantity !== 0);
-    
+
     return setOrderProducts(delProduct);
   };
   
@@ -146,6 +153,7 @@ function Order() {
                     type="checkbox"
                     value="Queijo"
                     onChange={extraCheckbox}
+                    
                   />
                   Queijo
                   <input type="checkbox" value="Ovo" onChange={extraCheckbox} />
@@ -159,12 +167,8 @@ function Order() {
       return null;
     });
   };
-  console.log(extra)
- console.log(orderProducts);
  
-
   return (
-    
     <div className="App">
       <AddClientInfo
         pedidos={orderProducts}
@@ -175,13 +179,14 @@ function Order() {
       <section className="Page">
         <div className="print-order">
           {orderProducts.map(orderProduct => (
-
             <>
               <p>
                 nome: {orderProduct.product.name}{" "}
                 {orderProduct.product.selectedOptions} quantidade:{" "}
-                {orderProduct.quantity} preço (unidade): {orderProduct.product.price},00
-                total: {orderProduct.quantity * orderProduct.product.price},00
+                {orderProduct.quantity} preço (unidade):{" "}
+                {orderProduct.product.selectedExtra}
+                {orderProduct.product.price},00 total:{" "}
+                {orderProduct.quantity * orderProduct.product.price},00
               </p>
               <Button
                 key={Math.random()}
@@ -207,6 +212,7 @@ function Order() {
       </section>
     </div>
   );
+
 }
 
 export default Order;
