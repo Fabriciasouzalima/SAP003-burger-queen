@@ -1,16 +1,13 @@
-import React from 'react';
-import ClientOrders from '../../components/AllOrders/allOrders.js'
+import React from "react";
+import ClientOrders from "../../components/AllOrders/allOrders.js";
 import Button from "../../components/Button/button.js";
-import firebase from '../../utils/firebaseUtils';
+import firebase from "../../utils/firebaseUtils";
 
-import "./styles.css"
-
+import "./styles.css";
 
 function Kitchen() {
-  const existingOrders = ClientOrders() 
-  console.log(existingOrders);
-  
-  
+  const existingOrders = ClientOrders();
+
   const confirm = existingOrders => {
     console.log(existingOrders.id);
 
@@ -29,7 +26,26 @@ function Kitchen() {
         console.log("guardei info");
       });
   };
-  
+
+  const done = existingOrders => {
+    console.log(existingOrders.id);
+
+    firebase
+      .firestore()
+      .collection("Orders")
+      .doc(existingOrders.id)
+      .update({
+        status: "Pronto",
+        hourDone: new Date(),
+        hourD: new Date().getHours(),
+        minD: new Date().getMinutes(),
+        secD: new Date().getSeconds()
+      })
+      .then(() => {
+        console.log("guardei info");
+      });
+  };
+
   return (
     <section className="cardBox">
       {existingOrders.map(existingOrders => (
@@ -50,10 +66,7 @@ function Kitchen() {
                   </div>
                   <p>extras : {products.product.selectedExtra}</p>
                   <p>Total: R$ {existingOrders.total},00</p>
-                 
                 </>
-                 
- 
               ))}
               <Button
                 handleClick={() => confirm(existingOrders)}
@@ -66,7 +79,6 @@ function Kitchen() {
       ))}
     </section>
   );
-
 }
 
 export default Kitchen;

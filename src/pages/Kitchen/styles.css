@@ -28,3 +28,13 @@
     font-weight: bold;
     display: flex;
 }
+
+.btn-status2{
+    padding: 5px;
+    background:#74B248;
+    border-radius: 10px;
+    border-color:#da552f;
+    color: #5A200f;
+    font-weight: bold;
+    flex-direction: column;
+}

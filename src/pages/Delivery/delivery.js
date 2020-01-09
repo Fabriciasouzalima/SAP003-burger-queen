@@ -29,7 +29,7 @@ function Delivery() {
       .collection("Orders")
       .doc(existingOrders.id)
       .update({
-        status: "Pronto",
+        status: " ",
         hourConclud: new Date(),
         hourC: new Date().getHours(),
         minC: new Date().getMinutes(),
@@ -39,6 +39,7 @@ function Delivery() {
         console.log("finish");
       });
   };
+ 
 
   const time = (item) => {
     let seconds = (((item.hourD*3600)+(item.minD*60)+(item.secD)) - ((item.hourS*3600)+(item.minS*60)+(item.minS)))
