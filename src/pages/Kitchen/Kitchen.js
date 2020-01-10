@@ -22,9 +22,6 @@ function Kitchen() {
         minD: new Date().getMinutes(),
         secD: new Date().getSeconds()
       })
-      .then(() => {
-        console.log("guardei info");
-      });
   };
 
   const done = existingOrders => {
@@ -39,9 +36,6 @@ function Kitchen() {
         minD: new Date().getMinutes(),
         secD: new Date().getSeconds()
       })
-      .then(() => {
-        console.log("mudei info");
-      });
   };
 
   return (
