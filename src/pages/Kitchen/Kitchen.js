@@ -28,8 +28,6 @@ function Kitchen() {
   };
 
   const done = existingOrders => {
-    console.log(existingOrders.id);
-
     firebase
       .firestore()
       .collection("Orders")
@@ -42,41 +40,49 @@ function Kitchen() {
         secD: new Date().getSeconds()
       })
       .then(() => {
-        console.log("guardei info");
+        console.log("mudei info");
       });
   };
 
   return (
     <section className="cardBox">
-      {existingOrders.map(existingOrders => (
-        <section className="container">
-          <div className="card">
-            <p>{existingOrders.dateHour}</p>
-            <div>
-              Cliente:{existingOrders.client}
-              <div>Mesa: {existingOrders.table}</div>
+      {existingOrders.map(existingOrders =>
+        existingOrders.status === "Esperando" ||
+        existingOrders.status === "Em preparo" ? (
+          <section className="container">
+            <div className="card">
+              <p>{existingOrders.dateHour}</p>
+              <div>
+                Cliente:{existingOrders.client}
+                <div>Mesa: {existingOrders.table}</div>
+              </div>
+              <ul>
+                Pedidos:
+                {existingOrders.pedidos.map(products => (
+                  <>
+                    <div>
+                      {products.quantity} x {products.product.name}{" "}
+                      {products.product.selectedOptions}
+                    </div>
+                    <p>extras : {products.product.selectedExtra}</p>
+                    <p>Total: R$ {existingOrders.total},00</p>
+                  </>
+                ))}
+                <Button
+                  handleClick={() => confirm(existingOrders)}
+                  className="btn-status"
+                  title={`${existingOrders.status}`}
+                />
+                <Button
+                  handleClick={() => done(existingOrders)}
+                  className="btn-status2"
+                  title="Pronto"
+                />
+              </ul>
             </div>
-            <ul>
-              Pedidos:
-              {existingOrders.pedidos.map(products => (
-                <>
-                  <div>
-                    {products.quantity} x {products.product.name}{" "}
-                    {products.product.selectedOptions}
-                  </div>
-                  <p>extras : {products.product.selectedExtra}</p>
-                  <p>Total: R$ {existingOrders.total},00</p>
-                </>
-              ))}
-              <Button
-                handleClick={() => confirm(existingOrders)}
-                class="btn-status"
-                title={`${existingOrders.status}`}
-              />
-            </ul>
-          </div>
-        </section>
-      ))}
+          </section>
+        ) : null
+      )}
     </section>
   );
 }

@@ -24,7 +24,7 @@ const AddClientInfo = (props) => {
                 hourS: new Date().getHours(),
                 minS: new Date().getMinutes(),
                 secS: new Date().getSeconds(),
-                status: "Enviado"
+                status: "Esperando"
             })
             .then(()=>{
                setTable('')
@@ -55,7 +55,7 @@ const AddClientInfo = (props) => {
         value={table}
         onChange={e => setTable(e.currentTarget.value)}
       />
-      <Button class="itens" handleClick={onSubmit} title="Enviar Pedidos" />
+      <Button className="itens" handleClick={onSubmit} title="Enviar Pedidos" />
     </div>
   );
 };

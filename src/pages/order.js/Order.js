@@ -21,7 +21,6 @@ function Order() {
         product.selectedExtra === i.product.selectedExtra 
     );
   
-
     if (itemIndex === -1) {
       const orderItem = { quantity: 1, product: product };
       setOrderProducts(current => [...current, orderItem]);
@@ -89,7 +88,7 @@ function Order() {
           <Button
             key={i}
             handleClick={() => addProduct(product)}
-            class="itens"
+            className="itens"
             title={`${product.name} R$ ${product.price},00`}
           />
         </>
@@ -108,7 +107,7 @@ function Order() {
           <Button
             key={i}
             handleClick={() => addProduct(product)}
-            class="itens"
+            className="itens"
             title={`${product.name} R$ ${product.price},00`}
           />
         );
@@ -129,7 +128,7 @@ function Order() {
                     price: newPrice
                   })
                 }
-                class="itens"
+                className="itens"
                 title={`${product.name} R$ ${product.price},00`}
                 disabled={options === ""}
               />
@@ -162,7 +161,6 @@ function Order() {
                    />
                   </>
                   )})}
-
                   
                 </>
               </div>
@@ -186,18 +184,19 @@ function Order() {
         <div className="print-order">
           {orderProducts.map(orderProduct => (
             <>
-              <p>
-                nome: {orderProduct.product.name}{" "}
-                {orderProduct.product.selectedOptions} quantidade:{" "}
-                {orderProduct.quantity} preço (unidade):{" "}
-                {orderProduct.product.selectedExtra}
-                {orderProduct.product.price},00 total:{" "}
-                {orderProduct.quantity * orderProduct.product.price},00
-              </p>
+              <section>
+                <p>nome: {orderProduct.product.name}{" "}</p>
+                <p>{orderProduct.product.selectedOptions}</p>
+                <p> extra{" "}{orderProduct.product.selectedExtra}</p>
+                <p>quantidade:{" "}{orderProduct.quantity}</p>
+                <p>preço (unidade):{" "}{orderProduct.product.price},00</p> 
+                <p></p>
+                total:{" "}{orderProduct.quantity * orderProduct.product.price},00
+              </section>
               <Button
                 key={Math.random()}
                 handleClick={() => delProduct(orderProduct)}
-                class="btn-del"
+                className="btn-del"
                 title={`🗑`}
               />
             </>

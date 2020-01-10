@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import ClientOrders from '../../components/AllOrders/allOrders.js'
+import ClientOrders from "../../components/AllOrders/allOrders.js";
 import firebase from '../../utils/firebaseUtils.js';
 
 
 
 function Delivery() {
-  const existingOrders = ClientOrders() 
-  console.log(existingOrders);
-  
+
+  const existingOrders = ClientOrders();
+
   const [delivery, setDelivery] = useState([]);
 
   useEffect(() => {
     firebase
-      .firestore().collection('Orders')
-      .orderBy('hourDone', 'asc')
+      .firestore().collection('Orders').orderBy('timeDone', 'asc')
       .onSnapshot((snap) => {
         const list = snap.docs.map((doc) => ({
           id: doc.id,
@@ -22,25 +21,9 @@ function Delivery() {
         setDelivery(list)
       })
   }, [])
-
-  const done = existingOrders => {
-    firebase
-      .firestore()
-      .collection("Orders")
-      .doc(existingOrders.id)
-      .update({
-        status: " ",
-        hourConclud: new Date(),
-        hourC: new Date().getHours(),
-        minC: new Date().getMinutes(),
-        secC: new Date().getSeconds()
-      })
-      .then(() => {
-        console.log("finish");
-      });
-  };
  
-
+ console.log(existingOrders);
+ 
   const time = (item) => {
     let seconds = (((item.hourD*3600)+(item.minD*60)+(item.secD)) - ((item.hourS*3600)+(item.minS*60)+(item.minS)))
     
@@ -52,7 +35,10 @@ function Delivery() {
 
     let hora = [horas +' h, ', minutos + ' m e ', segundos +' s.']
     return hora;
-    }
+  }
+
+  console.log(delivery);
+  
 
 
   return (
@@ -72,7 +58,7 @@ function Delivery() {
                       <p>{itens.name} - Qtd:{itens.count} </p>}                       
                   </div> 
                 )}
-              <button onClick={() => done(item)}>entregue!</button> 
+ 
               <div>O pedido ficou pronto em: {time(item)}</div>
               {console.log(time(item))}
             </div>
