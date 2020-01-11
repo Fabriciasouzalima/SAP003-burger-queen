@@ -8,7 +8,6 @@ import "./styles.css";
 function Delivery() {
   const existingOrders = ClientOrders();
 
-
   const send = existingOrders => {
     firebase
       .firestore()
@@ -20,26 +19,43 @@ function Delivery() {
         hourF: new Date().getHours(),
         minF: new Date().getMinutes(),
         secF: new Date().getSeconds()
-      })
+      });
   };
 
-  const time = item => {
-    let seconds =
-      item.hourD * 3600 +
-      item.minD * 60 +
-      item.secD -
-      (item.hourS * 3600 + item.minS * 60 + item.minS);
+  const time = existingOrders => {
+    console.log(existingOrders);
+
+    let seconds;
+    let rest;
+
+    if (existingOrders.hourSend !== existingOrders.hourDone) {
+      seconds =
+        existingOrders.hourD * 3600 +
+        existingOrders.minD * 60 +
+        existingOrders.secD -
+        (existingOrders.hourS * 3600 +
+          existingOrders.minS * 60 +
+          existingOrders.secS);
+    } else {
+      seconds =
+        existingOrders.hourD * 3600 +
+        existingOrders.minD * 60 +
+        existingOrders.secD +
+        86400 -
+        (existingOrders.hourS * 3600 +
+          existingOrders.minS * 60 +
+          existingOrders.secS);
+    }
 
     let horas = Math.floor(seconds / (60 * 60));
-    let resto = seconds % (60 * 60);
-    let minutos = Math.floor(seconds / 60);
-    resto %= 60;
-    let segundos = Math.ceil(resto);
+    rest = seconds % (60 * 60);
 
-    let hora = [horas + " h, ", minutos + " m e ", segundos + " s."];
+    let minutos = Math.floor(rest / 60);
+    rest %= 60;
+
+    let hora = [horas + " h:", minutos + " m "];
     return hora;
   };
-
   return (
     <section className="cardBox">
       {existingOrders.map(existingOrders =>
@@ -63,6 +79,7 @@ function Delivery() {
                     <p>Total: R$ {existingOrders.total},00</p>
                   </>
                 ))}
+                <div>O pedido ficou pronto em: {time(existingOrders)}</div>
                 <Button
                   handleClick={() => send(existingOrders)}
                   className="btn-status2"
@@ -78,11 +95,3 @@ function Delivery() {
 }
 
 export default Delivery;
-
-
-// <div>O pedido ficou pronto em: {time(item)}</div>
-// {console.log(time(item))}
-// </div>
-
-
-
