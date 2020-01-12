@@ -8,6 +8,7 @@ import Order from './pages/order.js/Order.js';
 import Kitchen from './pages/Kitchen/Kitchen.js';
 import Header from './components/Header/index.js';
 import Delivery from './pages/Delivery/delivery.js';
+import Login from './pages/Login/login.js'
 
 const Routes = () => {
     return (
@@ -15,7 +16,8 @@ const Routes = () => {
             <div>
                 <Header/>
                 <Switch>
-                    <Route exact path="/order" component={Order} />
+                    <Route exact path="/" component={Login} />
+                    <Route path="/order" component={Order} />
                     <Route path="/kitchen" component={Kitchen} />
                     <Route path="/Delivery" component={Delivery}/>
                 </Switch>
