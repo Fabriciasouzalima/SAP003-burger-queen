@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../components/Input/input.js";
 import Button from "../../components/Button/button.js";
-import Logo from './logo_burger_queen.png';
+import Logo from './background.png';
 import firebase from "../../utils/firebaseUtils.js";
 
 import "./styles.css";
@@ -47,19 +47,20 @@ function Login() {
     <main>
       <section className="box">
         <img width="50%" src={Logo} alt="Logo Burguer Queen" />
-        <form>
+        <form className="logBox">
+          <h1>Burger Queen</h1>
           <Input
             class="inputLog"
             placeholder="insira seu login"
-            // value={props.value}
-            // type={props.type}
+            value={login}
+            type="text"
             onChange={e => setLogin(e.target.value)}
           />
           <Input
             class="inputLog"
             placeholder="insira sua senha"
-            // value={props.value}
-            // type={props.type}
+            value={password}
+            type="text"
             onChange={e => setPassword(e.target.value)}
           />
           <Button
