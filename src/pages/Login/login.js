@@ -21,24 +21,22 @@ function Login() {
   async function sign(e) {
     e.preventDefault();
     firebase
-    .auth() 
-    .signInWithEmailAndPassword(email, password)
-    .then((user) => {
-      console.log(user.user.uid);
-      
-      firebase
-      .firestore()
-      .collection('users')
-      .doc(user.user.uid)
-      .get()
-      .then(querySnapshot => {
-      if (querySnapshot.data().kitchen) {
-      history.push("/kitchen");
-      } else {
-      history.push("/order", "/Delivery");
-      }
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(user => {
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(user.user.uid)
+          .get()
+          .then(querySnapshot => {
+            if (querySnapshot.data().kitchen) {
+              history.push("/kitchen");
+            } else {
+              history.push("/order", "/Delivery");
+            }
+          });
       });
-    }) 
     // .catch(error){
     //   alert(error.message);
     // }
@@ -50,33 +48,33 @@ function Login() {
         <img width={"50px"} src={Logo2} alt="Logo Burger Queen" />
         BURGER QUEEN
       </header>
-      <section className="box">
-        <img width="50%" height="100%" src={Logo} alt="Logo Burguer Queen" />
-        <form className="logBox">
-          <h1>Burger Queen</h1>
-          <Input
-            class="inputLog"
-            placeholder="insira seu login"
-            value={email}
-            type="text"
-            onChange={e => setEmail(e.target.value)}
-          />
-          <Input
-            class="inputLog"
-            placeholder="insira sua senha"
-            value={password}
-            type="text"
-            onChange={e => setPassword(e.target.value)}
-          />
-          <Button
-            className="btnLog"
-            title="Acessar"
-            handleClick={sign}
-            disabled={!infoLog()}
-            // id={props.id}
-          />
-        </form>
-      </section>
+        <div className="img">
+          <form className="logBox">
+            <h1>Burger Queen</h1>
+            <Input
+              class="inputLog"
+              placeholder="insira seu login"
+              value={email}
+              type="text"
+              onChange={e => setEmail(e.target.value)}
+            />
+            <Input
+              class="inputLog"
+              placeholder="insira sua senha"
+              value={password}
+              type="text"
+              onChange={e => setPassword(e.target.value)}
+            />
+            <Button
+              className="btnLog"
+              title="Acessar"
+              handleClick={sign}
+              disabled={!infoLog()}
+              // id={props.id}
+            />
+          </form>
+        </div>
+      
     </main>
   );
 }

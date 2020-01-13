@@ -1,6 +1,15 @@
 .box{
+    /* display: flex;
+    background-color: #f1bb70; */
+}
+
+.img{
     display: flex;
-    background-color: #f1bb70;
+    justify-content: flex-end;
+    background-image: url("./background.png");
+    background-size: cover;
+    height: 100%;
+
 }
 
 .btnLog{
@@ -39,5 +48,4 @@
     margin-top: 10px;
     border-radius: 20px;
     padding: 5px;
-
 }
