@@ -4,12 +4,8 @@
 
 * [1. Preâmbulo](#1-preâmbulo)
 * [2. Resumo do projeto](#2-resumo-do-projeto)
-* [3. Objetivos de aprendizagem](#3-objetivos-de-aprendizagem)
-* [4. Considerações gerais](#4-considerações-gerais)
 * [5. Critérios de aceitação mínimos do
   projeto](#5-critérios-de-aceitação-mínimos-do-projeto)
-* [6. Hacker Edition](#6-hacker-edition)
-* [7. Dicas e leituras complementares](#7-dicas-e-leituras-complementares)
 
 ***
 
@@ -94,29 +90,7 @@ adicionar e a interface deve mostrar o _resumo do pedido_ com o custo total.
 
 ![out](https://user-images.githubusercontent.com/110297/45984241-b8b51c00-c025-11e8-8fa4-a390016bee9d.gif)
 
-## 3. Objetivos de aprendizagem
 
-O objetivo principal é aprender a construir uma interface web usando React. Esse framework front-end ataca o seguinte problema: **como manter a interface e estado sincronizados**. Portanto, esta experiência espera familiarizá-la com o conceito de estado da tela, e como cada mudança no estado vai refletir na interface (por exemplo, toda vez que adicionamos um _produto_ para um _pedido_, a interface deve atualizar a lista de pedidos e o total).
-
-Finalmente, a interface deve ser pensada específicamente para rodar em **tablets**.
- 
-## 4. Considerações gerais
-
-Este projeto é individual.
-
-Trabalhe integralmente uma história de usuário antes de passar para a próxima. Cumpra todas as histórias possíveis dentro do tempo especificado.
-
-A lógica do projeto deve ser totalmente implementada em JavaScript (ES6 +). Neste projeto você deve usar [React](https://reactjs.org/).
-
-O aplicativo deve ser um _Single Page App_. Os pedidos serão enviados por meio de um _tablet_,mas **não queremos um aplicativo nativo**, mas sim um aplicativo Web que seja **responsivo**.
-
-Precisamos pensar bem sobre o UX para aqueles que vão receber os pedidos, o tamanho e a aparência dos botões, a visibilidade do estado atual do pedido, etc.
-
-O aplicativo deve usar scripts `npm-scripts` e ter `start`, `build` e `deploy`, que são responsáveis por iniciar, empacotar e implantar o aplicativo, respectivamente.
-
-Você deve definir a estrutura das pastas e arquivos que considera necessários. Você pode estruturá-los de acordo com as convenções do React.
-
-Para iniciar este projeto você terá que fazer um _fork_ e _clone_ deste repositório.
 
 ## 5. Critérios mínimos de aceitação do projeto
 
@@ -186,16 +160,6 @@ Eu como garçom/garçonete quero ver os pedidos que estão prontos para entregá
 
 ***
 
-## 6. Hacker Edition 
-
-As seções chamadas Hacker Edition são opcionais. Se você terminou tudo e ainda sobrou tempo, faça essa parte. Assim você poderá aprofundar e exercitar mais sobre os objetivos de aprendizagem do projeto.
-
-* Siga as recomendações para PWAs (Progressive Web Apps), para criar uma aplicação offline. Para orientá-las sobre este tema,recomendamos que você use Lighthouse, que é uma ferramenta do Google que nos ajuda a garantir que nossos aplicativos web sigam "boas práticas".
-
-* Faça testes que cubram 100% de statements, functions, lines e branches.
-
-* Implemente a seguinte história de usuário: 
-
 #### [História de usuário 4] Usuário deve ter seu perfil (login/senha) para acessar o sistema.
 
 Eu como funcionário do restaurante quero entrar na plataforma e ver apenas a tela importante para o meu trabalho.
@@ -217,109 +181,9 @@ O acordado abaixo deve acontecer para dizer que a história está terminada:
 
 ***
 
-## 7. Dicas e leituras complementares
-
-### Primeros passos
-
-* Faça um _fork_ deste repositório (no GitHub).
-
-* Clone seu _fork_ no seu computador:
-
-*  Crie um projeto usando `create-react-app`
-
-* Crie um projeto no [Firebase](https://firebase.google.com/)
-
-* Converta o menu descrito pelo cliente em uma coleção no Firebase.
-
-***
-
-### Outros recursos
-
-#### Framework / biblioteca
-
-* [React Hooks](https://reactjs.org/docs/hooks-intro.html)
-
-#### React Hooks
-
-* [Entendendo React Hooks](https://medium.com/@higornevesmarques/entendendo-react-hooks-2c0efae276a3)
-* [React Hooks - Rocketseat](https://blog.rocketseat.com.br/react-hooks/)
-* [Habemus React Hooks](https://willianjusten.com.br/habemus-react-hooks/)
-
-#### Ferramentas
-
-* [npm-scripts](https://docs.npmjs.com/misc/scripts)
-* [Babel](https://babeljs.io/)
-* [webpack](https://webpack.js.org/)
-* [Aphrodite](https://github.com/Khan/aphrodite)
-
-#### PWA
-
-* [Seu primeiro Progressive Web App - Google
-  developers](https://developers.google.com/web/fundamentals/codelabs/your-first-pwapp/?hl=es)
-* [Progressive Web Apps -
-  codigofacilito.com](https://codigofacilito.com/articulos/progressive-apps)
-* [offlinefirst.org](http://offlinefirst.org/)
-* [Usando Service Workers -
-  MDN](https://developer.mozilla.org/pt-BR/docs/Web/API/Service_Worker_API/Using_Service_Workers)
-* [Como habilitar dados sem conexão - Firebase
-  Docs](https://firebase.google.com/docs/firestore/manage-data/enable-offline?hl=es-419) 
-
-#### Serverless
-
-* [Serverless Framework 1.0 - Pagar.me Talks](https://www.youtube.com/watch?v=2oNovfw3V08)
-* [Firebase](https://firebase.google.com/)
-* [Serverless Architectures - Martin
-  Fowler](https://www.martinfowler.com/articles/serverless.html)
- 
-## Checklist
-
 ### `README.md`
 
 * [ ] Documentação do processo de design.
 * [ ] Inclui informações para desenvolvedores (dependências, instalação, uso, testes...)
 
-#### HU
 
-#### HU 1: Anotar pedidos
-
-* [ ] Digitar o nome do cliente.
-* [ ] Filtrar _menu_ para _café da manhã_ e _almoço/jantar_.
-* [ ] Adicionar item ao pedido.
-* [ ] Excluir item do pedido.
-* [ ] Mostrar _resumo_ do pedido com todos os itens e o total.
-* [ ] Enviar para a cozinha (isso deve salvar o pedido).
-
-#### HU 2: Ver pedidos na cozinha
-
-* [ ] Visualizar pedidos pendentes para produção.
-* [ ] Marcar pedido como pronto para entrega.
-* [ ] Ver histórico dos pedidos.
-
-#### HU 3: Entrega de pedidos
-
-* [ ] Visualizar pedidos pendentes para entrega.
-* [ ] Marcar pedido como entregue ao cliente.
-
-### UX
-
-* [ ] Funciona bem em tablets.
-* [ ] Fácil utilização em telas sensíveis ao toque.
-* [ ] Status atual do pedido sempre visível enquanto fazemos um pedido.
-
-### Hacker Edition
-
-* [ ] Segue as recomendações de PWAs.
-* [ ] Funciona bem offline.
-
-#### HU 4: Perfil do Usuário
-
-* [ ] Criar login e senha.
-* [ ] Criar tipo de usuário (cozinha / salão).
-* [ ] Entrar na tela correta para cada usuário.
-
-#### Testes
-
-* [ ] 100% de cobertura de _statements_.
-* [ ] 100% de cobertura de _functions_.
-* [ ] 100% de cobertura de _lines_.
-* [ ] 100% de cobertura de _branches_.
