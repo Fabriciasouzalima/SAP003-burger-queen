@@ -1,6 +1,7 @@
 import React from "react";
 import ClientOrders from "../../components/AllOrders/allOrders.js";
 import Button from "../../components/Button/button.js";
+import Header from "../../components/Header/index.js";
 import firebase from "../../utils/firebaseUtils";
 
 import "./styles.css";
@@ -56,41 +57,48 @@ function Delivery() {
     let hora = [horas + " h:", minutos + " m "];
     return hora;
   };
+
   return (
-    <section className="cardBox">
-      {existingOrders.map(existingOrders =>
-        existingOrders.status === "Pronto" ? (
-          <section className="container">
-            <div className="card">
-              <p>{existingOrders.dateHour}</p>
-              <div>
-                Cliente:{existingOrders.client}
-                <div>Mesa: {existingOrders.table}</div>
+    <div>
+      <>
+        <Header />
+      </>
+
+      <section className="cardBox">
+        {existingOrders.map(existingOrders =>
+          existingOrders.status === "Pronto" ? (
+            <section className="container">
+              <div className="card">
+                <p>{existingOrders.dateHour}</p>
+                <div>
+                  Cliente:{existingOrders.client}
+                  <div>Mesa: {existingOrders.table}</div>
+                </div>
+                <ul>
+                  Pedidos:
+                  {existingOrders.pedidos.map(products => (
+                    <>
+                      <div>
+                        {products.quantity} x {products.product.name}{" "}
+                        {products.product.selectedOptions}
+                      </div>
+                      <p>extras : {products.product.selectedExtra}</p>
+                      <p>Total: R$ {existingOrders.total},00</p>
+                    </>
+                  ))}
+                  <div>O pedido ficou pronto em: {time(existingOrders)}</div>
+                  <Button
+                    handleClick={() => send(existingOrders)}
+                    className="btn-status2"
+                    title="Pronto"
+                  />
+                </ul>
               </div>
-              <ul>
-                Pedidos:
-                {existingOrders.pedidos.map(products => (
-                  <>
-                    <div>
-                      {products.quantity} x {products.product.name}{" "}
-                      {products.product.selectedOptions}
-                    </div>
-                    <p>extras : {products.product.selectedExtra}</p>
-                    <p>Total: R$ {existingOrders.total},00</p>
-                  </>
-                ))}
-                <div>O pedido ficou pronto em: {time(existingOrders)}</div>
-                <Button
-                  handleClick={() => send(existingOrders)}
-                  className="btn-status2"
-                  title="Pronto"
-                />
-              </ul>
-            </div>
-          </section>
-        ) : null
-      )}
-    </section>
+            </section>
+          ) : null
+        )}
+      </section>
+    </div>
   );
 }
 

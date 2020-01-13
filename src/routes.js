@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import Order from './pages/order.js/Order.js';
 import Kitchen from './pages/Kitchen/Kitchen.js';
-import Header from './components/Header/index.js';
 import Delivery from './pages/Delivery/delivery.js';
 import Login from './pages/Login/login.js'
 
@@ -14,7 +13,6 @@ const Routes = () => {
     return (
         <Router>
             <div>
-                <Header/>
                 <Switch>
                     <Route exact path="/" component={Login} />
                     <Route path="/order" component={Order} />

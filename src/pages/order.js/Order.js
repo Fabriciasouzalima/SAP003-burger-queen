@@ -3,6 +3,7 @@ import AddClientInfo from "../../components/AddCliente/addclient.js";
 import Button from "../../components/Button/button.js";
 import AllMenu from "../../components/AllMenu/allMenu.js";
 import "./styles.css";
+import Header from "../../components/Header/index.js";
 
 function Order() {
   const existingProducts = AllMenu();
@@ -174,6 +175,7 @@ function Order() {
  
   return (
     <div className="App">
+      <Header/>
       <AddClientInfo
         pedidos={orderProducts}
         setOrderProducts={setOrderProducts}

@@ -1,6 +1,7 @@
 import React from "react";
 import ClientOrders from "../../components/AllOrders/allOrders.js";
 import Button from "../../components/Button/button.js";
+import Header from "../../components/Header/index.js";
 import firebase from "../../utils/firebaseUtils";
 
 import "./styles.css";
@@ -21,7 +22,7 @@ function Kitchen() {
         hourD: new Date().getHours(),
         minD: new Date().getMinutes(),
         secD: new Date().getSeconds()
-      })
+      });
   };
 
   const done = existingOrders => {
@@ -35,49 +36,54 @@ function Kitchen() {
         hourD: new Date().getHours(),
         minD: new Date().getMinutes(),
         secD: new Date().getSeconds()
-      })
+      });
   };
 
   return (
-    <section className="cardBox">
-      {existingOrders.map(existingOrders =>
-        existingOrders.status === "Esperando" ||
-        existingOrders.status === "Em preparo" ? (
-          <section className="container">
-            <div className="card">
-              <p>{existingOrders.dateHour}</p>
-              <div>
-                Cliente:{existingOrders.client}
-                <div>Mesa: {existingOrders.table}</div>
+    <div>
+      <>
+        <Header/>
+      </>
+      <section className="cardBox">
+        {existingOrders.map(existingOrders =>
+          existingOrders.status === "Esperando" ||
+          existingOrders.status === "Em preparo" ? (
+            <section className="container">
+              <div className="card">
+                <p>{existingOrders.dateHour}</p>
+                <div>
+                  Cliente:{existingOrders.client}
+                  <div>Mesa: {existingOrders.table}</div>
+                </div>
+                <ul>
+                  Pedidos:
+                  {existingOrders.pedidos.map(products => (
+                    <>
+                      <div>
+                        {products.quantity} x {products.product.name}{" "}
+                        {products.product.selectedOptions}
+                      </div>
+                      <p>extras : {products.product.selectedExtra}</p>
+                      <p>Total: R$ {existingOrders.total},00</p>
+                    </>
+                  ))}
+                  <Button
+                    handleClick={() => confirm(existingOrders)}
+                    className="btn-status"
+                    title={`${existingOrders.status}`}
+                  />
+                  <Button
+                    handleClick={() => done(existingOrders)}
+                    className="btn-status2"
+                    title="Pronto"
+                  />
+                </ul>
               </div>
-              <ul>
-                Pedidos:
-                {existingOrders.pedidos.map(products => (
-                  <>
-                    <div>
-                      {products.quantity} x {products.product.name}{" "}
-                      {products.product.selectedOptions}
-                    </div>
-                    <p>extras : {products.product.selectedExtra}</p>
-                    <p>Total: R$ {existingOrders.total},00</p>
-                  </>
-                ))}
-                <Button
-                  handleClick={() => confirm(existingOrders)}
-                  className="btn-status"
-                  title={`${existingOrders.status}`}
-                />
-                <Button
-                  handleClick={() => done(existingOrders)}
-                  className="btn-status2"
-                  title="Pronto"
-                />
-              </ul>
-            </div>
-          </section>
-        ) : null
-      )}
-    </section>
+            </section>
+          ) : null
+        )}
+      </section>
+    </div>
   );
 }
 
