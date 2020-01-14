@@ -3,9 +3,10 @@
 ## Índice
 
 * [1. Preâmbulo](#1-preâmbulo)
-* [2. Resumo do projeto](#2-resumo-do-projeto)
-* [5. Critérios de aceitação mínimos do
-  projeto](#5-critérios-de-aceitação-mínimos-do-projeto)
+* [2. Critérios de aceitação mínimos do
+  projeto](#2-critérios-de-aceitação-mínimos-do-projeto)
+* [3. Interface](#3-Interface)
+* [4. Considerações Gerais](#3-Considerações-Gerais)
 
 ***
 
@@ -32,67 +33,7 @@ Como desenvolvedora Front-end, estes kits de desenvolvimento podem resultar em
 uma grande ajuda para implementar rapidamente _features_ dos projetos em que
 você for trabalhar.
 
-## 2. Resumo do projeto
-
-Desta vez temos um projeto 100% por demanda. Você sempre pode (e deve) fazer
-sugestões de melhora e mudança, mas muitas vezes trabalhará em um projeto em que
-primeiro deve se assegurar de cumprir os requisitos.
-
-Um pequeno restaurante de hambúrgueres, que está crescendo, necessita uma
-interface em que se possa realizar pedidos utilizando um _tablet_, e enviá-los
-para a cozinha para que sejam preparados de forma ordenada e eficiente.
-
-![burger-queen](https://user-images.githubusercontent.com/110297/42118136-996b4a52-7bc6-11e8-8a03-ada078754715.jpg)
-
-Estas são as informações que temos do cliente:
-
-> Somos **Burger Queen**, um fast food 24hrs.
->
->A nossa proposta de serviço 24 horas foi muito bem recebida e, para continuar a
->crescer, precisamos de um sistema que nos ajude a receber pedidos de nossos
->clientes.
->
->Nós temos 2 menus. Um muito simples para o café da manhã:
->
->| Ítem                      |Preço R$|
->|---------------------------|------|
->| Café americano            |    5 |
->| Café com leite            |    7 |
->| Misto Quente              |   10 |
->| Suco de fruta natural     |    7 |
->
->E outro menu para o resto do dia:
->
->| Ítem                      |Preço |
->|---------------------------|------|
->|**Hambúrgueres**           |   **R$**   |
->|Hambúrguer simples         |    10|
->|Hambúrguer duplo           |    15|
->|**Acompanhamentos**        |   **R$**   |
->|Batata frita               |     5|
->|Anéis de cebola            |     5|
->|**Bebidas**                |   **R$**   |
->|Água 500ml                 |     5|
->|Água 750ml                 |     7|
->|Refrigerante 500ml         |     7|
->|Refrigerante 750ml         |    10|
->
->**Importante:** Os clientes podem escolher entre hambúrgueres de carne bovina,
->frango ou vegetariano. Além disso, por um adicional de R$ 1,00 , eles podem
->adicionar queijo ou ovo.
->
->Nossos clientes são bastante indecisos, por isso é muito comum que eles mudem o
->seu pedido várias vezes antes de finalizar.
-
-A interface deve mostrar os dois menus (café da manhã e restante do dia), cada
-um com todos os seus _produtos_. O usuário deve poder escolher que _produtos_
-adicionar e a interface deve mostrar o _resumo do pedido_ com o custo total.
-
-![out](https://user-images.githubusercontent.com/110297/45984241-b8b51c00-c025-11e8-8fa4-a390016bee9d.gif)
-
-
-
-## 5. Critérios mínimos de aceitação do projeto
+## 2. Critérios mínimos de aceitação do projeto
 
 ### Definição do produto
 
@@ -179,11 +120,32 @@ O acordado abaixo deve acontecer para dizer que a história está terminada:
 * Você fez testes de usabilidade e incorporou o feedback do usuário.
 * Você deu deploy de seu aplicativo.
 
+## 3. Interface 
+
+ * [BurgerQueen](https://burger-queen-aff55.firebaseapp.com/)
+
+![Página de pedidos](public/image/interface.gif)
+
+
+## 4. Considerações Gerais
+
+* Interface deve ser pensada específicamente para rodar em **tablets**.
+* Aplicativo Web **responsivo**.
+* O aplicativo é um _Single Page App_.
+* Segue as recomendações de PWAs.
+
+Ferramentas e bibliotecas: 
+ * JavaScript (ES6 +)
+ * React.js (Hooks)
+ * [Firebase](https://firebase.google.com/docs?hl=pt-br)
+ * [React Router Dom](https://reacttraining.com/react-router/web/guides/quick-start)
+ * [Eslint](https://www.npmjs.com/package/eslint-plugin-react)
+ * [Prettier](https://prettier.io/)
+ * [Trello](https://trello.com)
+
+![Trello](public/image/trello1.png)
+![Trello](public/image/trello2.png)
+ 
 ***
-
-### `README.md`
-
-* [ ] Documentação do processo de design.
-* [ ] Inclui informações para desenvolvedores (dependências, instalação, uso, testes...)
 
 
