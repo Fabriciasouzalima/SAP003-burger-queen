@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import Input from "../../components/Input/input.js";
 import Button from "../../components/Button/button.js";
-import Logo from "./background.png";
 import Logo2 from "./logo_burger_queen.png";
 import firebase from "../../utils/firebaseUtils.js";
+import { useHistory } from "react-router-dom";
 
 import "./styles.css";
 
-import { useHistory } from "react-router-dom";
 
 function Login() {
   let history = useHistory();
@@ -68,7 +67,6 @@ function Login() {
               title="Acessar"
               handleClick={sign}
               disabled={!infoLog()}
-              // id={props.id}
             />
           </form>
         </div>

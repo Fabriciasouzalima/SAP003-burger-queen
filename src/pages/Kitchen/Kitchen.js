@@ -1,5 +1,5 @@
 import React from "react";
-import ClientOrders from "../../components/AllOrders/allOrders.js";
+import ClientOrders from "../../utils/AllOrders/allOrders.js";
 import Button from "../../components/Button/button.js";
 import Header from "../../components/Header/index.js";
 import firebase from "../../utils/firebaseUtils";
@@ -10,8 +10,6 @@ function Kitchen() {
   const existingOrders = ClientOrders();
 
   const confirm = existingOrders => {
-    console.log(existingOrders.id);
-
     firebase
       .firestore()
       .collection("Orders")

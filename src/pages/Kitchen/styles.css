@@ -20,14 +20,13 @@
     align-items: center;
 }
 .container{
-    padding: 5px;
+    padding: 18px;
     margin: 2vw;
     background: #da552f;
     font-size: 18px;
     font-weight: bold;
     color: #fff;
     border-radius: 20px;
-    
 }
 
 
@@ -42,5 +41,6 @@
 }
 
 .btn-status2{
+    padding: 8px;
     background:#74B248;
 }

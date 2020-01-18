@@ -1,5 +1,5 @@
 import React from "react";
-import ClientOrders from "../../components/AllOrders/allOrders.js";
+import ClientOrders from "../../utils/AllOrders/allOrders.js";
 import Button from "../../components/Button/button.js";
 import Header from "../../components/Header/index.js";
 import firebase from "../../utils/firebaseUtils";
@@ -8,6 +8,7 @@ import "./styles.css";
 
 function Delivery() {
   const existingOrders = ClientOrders();
+  
 
   const send = existingOrders => {
     firebase
@@ -24,8 +25,7 @@ function Delivery() {
   };
 
   const time = existingOrders => {
-    console.log(existingOrders);
-
+ 
     let seconds;
     let rest;
 
@@ -54,8 +54,9 @@ function Delivery() {
     let minutos = Math.floor(rest / 60);
     rest %= 60;
 
-    let hora = [horas + " h:", minutos + " m "];
-    return hora;
+    const hora = [horas + " horas e ", minutos + " minutos "]
+
+    return hora ;
   };
 
   return (
@@ -71,22 +72,24 @@ function Delivery() {
               <div className="card">
                 <p>{existingOrders.dateHour}</p>
                 <div>
-                  Cliente:{existingOrders.client}
-                  <div>Mesa: {existingOrders.table}</div>
+                  <p>Cliente: {existingOrders.client}</p>
+                  <p>Mesa: {existingOrders.table}</p>
                 </div>
                 <ul>
                   Pedidos:
                   {existingOrders.pedidos.map(products => (
                     <>
-                      <div>
-                        {products.quantity} x {products.product.name}{" "}
-                        {products.product.selectedOptions}
-                      </div>
-                      <p>extras : {products.product.selectedExtra}</p>
-                      <p>Total: R$ {existingOrders.total},00</p>
+                      <p>{products.quantity} x {products.product.name}{" "}</p>
+                      {products.product.selectedOptions}
+                      {products.product.selectedExtra ? (
+                        <p>Extras : {products.product.selectedExtra}</p>
+                      ) : (
+                        false
+                      )}
                     </>
                   ))}
-                  <div>O pedido ficou pronto em: {time(existingOrders)}</div>
+                  <p>Total: R$ {existingOrders.total},00</p>
+                  <p>O pedido ficou pronto em: {time(existingOrders)}</p>
                   <Button
                     handleClick={() => send(existingOrders)}
                     className="btn-status2"

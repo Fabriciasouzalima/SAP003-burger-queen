@@ -103,3 +103,15 @@ h1{
     margin-top: 5px;
 
 }
+
+.boxOrder{
+    flex-direction: column;
+    background: #f1bb70;
+    color: #5A200f;
+    border-radius: 5px;
+    border: 0;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 5px;
+}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import AddClientInfo from "../../components/AddCliente/addclient.js";
+import AddClientInfo from "../../utils/AddCliente/addclient.js";
 import Button from "../../components/Button/button.js";
-import AllMenu from "../../components/AllMenu/allMenu.js";
+import AllMenu from "../../utils/AllMenu/allMenu.js";
 import "./styles.css";
 import Header from "../../components/Header/index.js";
 
@@ -185,7 +185,7 @@ function Order() {
       <section className="Page">
         <div className="print-order">
           {orderProducts.map(orderProduct => (
-            <>
+            <div className="boxOrder">
               <section>
                 <p>nome: {orderProduct.product.name}{" "}</p>
                 <p>{orderProduct.product.selectedOptions}</p>
@@ -201,7 +201,7 @@ function Order() {
                 className="btn-del"
                 title={`🗑`}
               />
-            </>
+            </div>
           ))}
 
           <p className="total-order">
