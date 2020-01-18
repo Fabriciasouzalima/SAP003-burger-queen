@@ -62,7 +62,7 @@ function Login() {
             onChange={e => setPassword(e.target.value)}
           />
           <Button className="btnLog" handleClick={sign} disabled={!infoLog()}>
-            Acessar
+            {'Acessar'}
           </Button>
         </form>
       </div>

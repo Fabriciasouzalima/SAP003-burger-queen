@@ -90,8 +90,7 @@ function Order() {
             key={i}
             handleClick={() => addProduct(product)}
             className="itens"
-            title={`${product.name} R$ ${product.price},00`}
-          />
+          >{`${product.name} R$ ${product.price},00`}</Button>
         </>
       ) : (
         false
@@ -199,8 +198,7 @@ function Order() {
                 key={Math.random()}
                 handleClick={() => delProduct(orderProduct)}
                 className="btn-del"
-                // title={`🗑`}
-              >{`🗑`}</Button>
+              >{"🗑"}</Button>
             </div>
           ))}
 
