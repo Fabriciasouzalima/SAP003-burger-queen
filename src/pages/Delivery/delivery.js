@@ -4,7 +4,6 @@ import Button from "../../components/Button/button.js";
 import Header from "../../components/Header/index.js";
 import firebase from "../../utils/firebaseUtils";
 
-import "./styles.css";
 
 function Delivery() {
   const existingOrders = ClientOrders();
@@ -93,8 +92,7 @@ function Delivery() {
                   <Button
                     handleClick={() => send(existingOrders)}
                     className="btn-status2"
-                    title="Pronto"
-                  />
+                  >{"Pronto"}</Button>
                 </ul>
               </div>
             </section>

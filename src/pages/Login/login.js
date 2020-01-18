@@ -7,11 +7,11 @@ import { useHistory } from "react-router-dom";
 
 import "./styles.css";
 
-
 function Login() {
   let history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [page, setPage] = useState("");
 
   const infoLog = () => {
     return email.length > 0 && password.length > 0;
@@ -36,7 +36,6 @@ function Login() {
             }
           });
       });
-
   }
 
   return (
@@ -45,32 +44,28 @@ function Login() {
         <img width={"50px"} src={Logo2} alt="Logo Burger Queen" />
         BURGER QUEEN
       </header>
-        <div className="img">
-          <form className="logBox">
-            <h1>Burger Queen</h1>
-            <Input
-              class="inputLog"
-              placeholder="insira seu login"
-              value={email}
-              type="text"
-              onChange={e => setEmail(e.target.value)}
-            />
-            <Input
-              class="inputLog"
-              placeholder="insira sua senha"
-              value={password}
-              type="password"
-              onChange={e => setPassword(e.target.value)}
-            />
-            <Button
-              className="btnLog"
-              title="Acessar"
-              handleClick={sign}
-              disabled={!infoLog()}
-            />
-          </form>
-        </div>
-      
+      <div className="img">
+        <form className="logBox">
+          <h1>Burger Queen</h1>
+          <Input
+            class="inputLog"
+            placeholder="insira seu login"
+            value={email}
+            type="text"
+            onChange={e => setEmail(e.target.value)}
+          />
+          <Input
+            class="inputLog"
+            placeholder="insira sua senha"
+            value={password}
+            type="password"
+            onChange={e => setPassword(e.target.value)}
+          />
+          <Button className="btnLog" handleClick={sign} disabled={!infoLog()}>
+            Acessar
+          </Button>
+        </form>
+      </div>
     </main>
   );
 }

@@ -40,7 +40,7 @@ function Kitchen() {
   return (
     <div>
       <>
-        <Header/>
+        <Header />
       </>
       <section className="cardBox">
         {existingOrders.map(existingOrders =>
@@ -68,13 +68,16 @@ function Kitchen() {
                   <Button
                     handleClick={() => confirm(existingOrders)}
                     className="btn-status"
-                    title={`${existingOrders.status}`}
-                  />
+                  >
+                    {" "}
+                    {`${existingOrders.status}`}
+                  </Button>
                   <Button
                     handleClick={() => done(existingOrders)}
                     className="btn-status2"
-                    title="Pronto"
-                  />
+                  >
+                    {"Pronto"}{" "}
+                  </Button>
                 </ul>
               </div>
             </section>

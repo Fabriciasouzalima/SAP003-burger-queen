@@ -199,8 +199,8 @@ function Order() {
                 key={Math.random()}
                 handleClick={() => delProduct(orderProduct)}
                 className="btn-del"
-                title={`🗑`}
-              />
+                // title={`🗑`}
+              >{`🗑`}</Button>
             </div>
           ))}
 
