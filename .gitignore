@@ -20,6 +20,5 @@ yarn-debug.log*
 yarn-error.log*node_modules
 utils 
 
-/ utils
-
-.firebase 
+# utils
+.firebase/
