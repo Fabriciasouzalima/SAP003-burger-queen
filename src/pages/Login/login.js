@@ -60,7 +60,7 @@ function Login() {
               class="inputLog"
               placeholder="insira sua senha"
               value={password}
-              type="text"
+              type="password"
               onChange={e => setPassword(e.target.value)}
             />
             <Button

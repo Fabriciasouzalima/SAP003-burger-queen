@@ -122,6 +122,10 @@ O acordado abaixo deve acontecer para dizer que a história está terminada:
 
 ## 3. Interface 
 
+ * Usúarios de testes : 
+ * ana@burgerqueen.com.br; senha: 123456
+ * pedro@burgerqueen.com.br; senha: 123456
+ 
  * [BurgerQueen](https://burger-queen-aff55.firebaseapp.com/)
 
 ![Página de pedidos](public/image/interface.gif)
