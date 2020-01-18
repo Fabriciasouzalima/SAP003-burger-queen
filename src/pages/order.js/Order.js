@@ -10,18 +10,16 @@ function Order() {
   const [orderProducts, setOrderProducts] = useState([]);
   const [total, setTotal] = useState("");
   const [options, setOptions] = useState("");
-  const [extra, setExtra] = useState([])
-
+  const [extra, setExtra] = useState([]);
 
   const addProduct = product => {
-
     const itemIndex = orderProducts.findIndex(
       i =>
         i.product.name === product.name &&
         product.selectedOptions === i.product.selectedOptions &&
-        product.selectedExtra === i.product.selectedExtra 
+        product.selectedExtra === i.product.selectedExtra
     );
-  
+
     if (itemIndex === -1) {
       const orderItem = { quantity: 1, product: product };
       setOrderProducts(current => [...current, orderItem]);
@@ -32,12 +30,10 @@ function Order() {
     }
 
     setOptions("");
-    setExtra("")
-
+    setExtra("");
   };
 
   const delProduct = product => {
-    
     const deletedProduct = orderProducts.map(elem => {
       if (
         elem.product.name === product.product.name &&
@@ -58,7 +54,7 @@ function Order() {
 
     return setOrderProducts(delProduct);
   };
-  
+
   useEffect(() => {
     const orderTotal = orderProducts.reduce(
       (total, orderProduct) =>
@@ -70,11 +66,11 @@ function Order() {
 
   const extraCheckbox = e => {
     e.persist();
-    if (!extra.includes(e.target.value)){
-      setExtra([...extra, e.target.value])
+    if (!extra.includes(e.target.value)) {
+      setExtra([...extra, e.target.value]);
     } else {
-      setExtra(extra.filter(ex => ex !== e.target.value))
-    } 
+      setExtra(extra.filter(ex => ex !== e.target.value));
+    }
   };
 
   const radioOnChange = e => {
@@ -95,26 +91,22 @@ function Order() {
       ) : (
         false
       );
-    })
-  }
-  
-     
+    });
+  };
+
   const renderProducts = () => {
     return existingProducts.map((product, i) => {
       if (product.lunch) {
-  
         return (
           <Button
             key={i}
             handleClick={() => addProduct(product)}
             className="itens"
-            title={`${product.name} R$ ${product.price},00`}
-          />
+          >{`${product.name} R$ ${product.price},00`}</Button>
         );
       } else if (product.burger) {
+        const newPrice = product.price + extra.length;
 
-        const newPrice = product.price + extra.length
-    
         return (
           <>
             <form class="boxItens">
@@ -129,9 +121,11 @@ function Order() {
                   })
                 }
                 className="itens"
-                title={`${product.name} R$ ${product.price},00`}
                 disabled={options === ""}
-              />
+              >
+                {" "}
+                {`${product.name} R$ ${product.price},00`}
+              </Button>
               <div>
                 <p>Opções</p>
                 {product.options.map(option => {
@@ -149,19 +143,19 @@ function Order() {
                 })}
                 <p>Extras</p>
                 <>
-                 {product.extra.map(extraSel=> {
-                  return (
-                   <>
-                   <label>{extraSel}</label>
-                   <input
-                    type="checkbox"
-                    value={extraSel}
-                    onChange={extraCheckbox}
-                    checked={extra.includes(extraSel)}
-                   />
-                  </>
-                  )})}
-                  
+                  {product.extra.map(extraSel => {
+                    return (
+                      <>
+                        <label>{extraSel}</label>
+                        <input
+                          type="checkbox"
+                          value={extraSel}
+                          onChange={extraCheckbox}
+                          checked={extra.includes(extraSel)}
+                        />
+                      </>
+                    );
+                  })}
                 </>
               </div>
             </form>
@@ -171,10 +165,10 @@ function Order() {
       return null;
     });
   };
- 
+
   return (
     <div className="App">
-      <Header/>
+      <Header />
       <AddClientInfo
         pedidos={orderProducts}
         setOrderProducts={setOrderProducts}
@@ -186,19 +180,21 @@ function Order() {
           {orderProducts.map(orderProduct => (
             <div className="boxOrder">
               <section>
-                <p>nome: {orderProduct.product.name}{" "}</p>
+                <p>nome: {orderProduct.product.name} </p>
                 <p>{orderProduct.product.selectedOptions}</p>
-                <p> extra{" "}{orderProduct.product.selectedExtra}</p>
-                <p>quantidade:{" "}{orderProduct.quantity}</p>
-                <p>preço (unidade):{" "}{orderProduct.product.price},00</p> 
+                <p> extra {orderProduct.product.selectedExtra}</p>
+                <p>quantidade: {orderProduct.quantity}</p>
+                <p>preço (unidade): {orderProduct.product.price},00</p>
                 <p></p>
-                total:{" "}{orderProduct.quantity * orderProduct.product.price},00
+                total: {orderProduct.quantity * orderProduct.product.price},00
               </section>
               <Button
                 key={Math.random()}
                 handleClick={() => delProduct(orderProduct)}
                 className="btn-del"
-              >{"🗑"}</Button>
+              >
+                {"🗑"}
+              </Button>
             </div>
           ))}
 
@@ -217,7 +213,6 @@ function Order() {
       </section>
     </div>
   );
-
 }
 
 export default Order;
